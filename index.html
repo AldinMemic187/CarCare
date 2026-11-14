@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Auto Aufbereitung AT – Fahrzeugaufbereitung in Wien</title>
-<meta name="description" content="Fahrzeugaufbereitung in 1230 Wien: Politur, Keramikversiegelung, Innenreinigung, Steinschlagreparatur und Leasingrückgabe.">
+<title>GS CarCare – Fahrzeugaufbereitung & Detailing in Wien</title>
+<meta name="description" content="GS CarCare in 1230 Wien: Innenaufbereitung, Außenaufbereitung mit Basiswäsche, 1-3 stufige Lackpolitur, Kratzer entfernen, Detailing & optische Umbauten.">
 <style>
 :root{--bg:#fafaf8;--fg:#1c1c1a;--mut:#6b6b66;--line:#e0dfd9;--card:#fff;--acc:#1c1c1a;--onacc:#fff;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
@@ -42,6 +42,8 @@ section h2{font-size:24px;margin-bottom:20px}
 .tick svg{width:12px;height:12px;stroke:var(--onacc);fill:none;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;opacity:0}
 .card.sel .tick{background:var(--acc);border-color:var(--acc)}.card.sel .tick svg{opacity:1}.card.sel .pick{color:var(--fg)}
 .card.sel{box-shadow:inset 0 0 0 1px var(--fg)}
+.c-price{display:inline-block;font-size:12px;font-weight:700;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:3px 10px;margin-top:10px}
+.card.sel .c-price{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
 .nav{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
 .btn.o{background:none;color:var(--fg);border:1px solid var(--line)}
 .btn:disabled{opacity:.4;cursor:default}
@@ -105,7 +107,7 @@ footer a:hover, footer button:hover{color:var(--fg);text-decoration:underline}
 .back{position:absolute;top:16px;left:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;transition:transform .15s,border-color .2s}
 .back:hover{border-color:var(--fg)}.back:active{transform:scale(.9)}.back[hidden]{display:none}
 .dots{position:absolute;top:21px;right:20px;display:flex;gap:6px}
-.dots i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:600;border:1px solid var(--line);color:var(--mut);transition:.3s}.dots i.on{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+.dots button{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);color:var(--mut);transition:.3s}.dots button.on{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
 .pstep h3{font-size:22px;margin:0 0 18px;text-transform:none;letter-spacing:-.01em;color:var(--fg)}
 .pstep[hidden]{display:none}
 @keyframes pop{from{opacity:0;transform:translateY(16px) scale(.94)}to{opacity:1;transform:none}}
@@ -154,6 +156,44 @@ footer .w{flex-direction:column;align-items:flex-start}
 footer a, footer button{margin:0 18px 0 0}
 }
 @media(max-width:360px){.logo span{font-size:14px}.logo img{height:40px}.hb{padding:8px 12px}}
+
+/* ---- Preisrechner v2 ---- */
+.dots button{background:none;padding:0;cursor:pointer}
+.dots button:disabled{cursor:default;opacity:.45}
+.dots button:not(:disabled):hover{border-color:var(--fg)}
+.dots button.on{background:var(--acc)}
+.szcap{margin:16px 0 0;min-height:1.6em;text-align:center;color:var(--mut);font-size:14px}
+@media(max-width:900px){.szcap{display:none}}
+@media(min-width:901px){
+.sz{grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.tile{align-items:center;text-align:center;gap:2px;padding:14px 4px 12px}
+.tile svg{width:58px;height:27px;margin-bottom:6px}
+.tile b{font-size:13.5px;line-height:1.25;text-wrap:balance}
+.tile small{display:none}
+}
+.ctx{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 20px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:14px}
+.ctx span{font-weight:600}
+.lnk{background:none;border:0;padding:0;font:inherit;font-size:13px;color:var(--mut);text-decoration:underline;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
+.lnk:hover{color:var(--fg)}
+.sum .lnks{display:flex;gap:18px;margin:4px 0 2px}
+.sum .lnk{color:inherit;opacity:.7}.sum .lnk:hover{color:inherit;opacity:1}
+.gh{margin:0 0 12px;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--mut);font-weight:600}
+.pgrp+.pgrp{margin-top:28px}
+.card{display:flex;flex-direction:column}
+.ct{display:block;width:100%;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.ct::after{content:"";position:absolute;inset:0}
+.ct:focus-visible{outline:none}
+.ct:focus-visible::after{outline:2px solid var(--fg);outline-offset:-3px;border-radius:12px}
+.card .c-price{align-self:flex-start}
+.card .pick{margin-top:auto;padding-top:16px}
+.tiers{position:relative;z-index:2;display:flex;margin-top:14px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--bg)}
+.tiers button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;padding:7px 2px;border:0;border-right:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:13px;font-weight:600;line-height:1.25;cursor:pointer;transition:background .2s,color .2s}
+.tiers button:last-child{border-right:0}
+.tiers button:hover{background:var(--line)}
+.tiers small{font-size:11px;font-weight:500;opacity:.7;white-space:nowrap}
+.tiers button[aria-pressed=true]{background:var(--acc);color:var(--onacc)}
+.card:not(.sel) .tiers button[aria-pressed=true]{background:var(--line);color:var(--fg)}
+.tiers button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
 textarea{resize:vertical;max-width:100%}
 .ic{width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;margin:0 auto 14px}
 .ic svg,.tabs svg{stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -173,18 +213,18 @@ textarea{resize:vertical;max-width:100%}
 <nav><a href="#leistungen">Leistungen</a><a href="#preise">Preise</a><a href="#kontakt">Kontakt</a></nav><a class="hb" href="#kontakt">Kontakt</a></div></header>
 
 <main id="top" class="w">
-<div class="intro"><h1>Fahrzeugaufbereitung in Wien</h1>
-<p>Carlbergergasse 45, 1230 Wien · Mo–Fr 08:00–17:00 Uhr · nur nach Terminvereinbarung</p></div>
+<div class="intro"><h1>GS CarCare – Fahrzeugaufbereitung & Detailing</h1>
+<p>Carlbergergasse 45, 1230 Wien · Tel. 0680 502 08 84 · Nur nach Terminvereinbarung<br><span style="font-size:14px;color:var(--mut)">Aufbereitung – Detailing – leichte Umbauten · Sauber ist Standard – Detail ist Leidenschaft!</span></p></div>
 
 <section id="leistungen"><h2>Leistungen</h2><div class="ls" id="ls"></div></section>
 
 <section id="preise"><h2>Preise</h2>
 <div class="pcard">
 <button class="back" id="back" type="button" aria-label="Zurück" hidden><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
-<div class="dots"><i class="on">1</i><i>2</i><i>3</i></div>
-<div class="pstep" id="ps0"><h3>Fahrzeugkategorie</h3><div class="sz" id="sz"></div></div>
-<div class="pstep" id="ps1" hidden><h3>Leistungen wählen</h3><div class="cards" id="pl"></div><button class="btn" id="pnext" type="button">Weiter</button></div>
-<div class="pstep" id="ps2" hidden><h3>Ihr Preis</h3><div class="sum"><div id="vh" style="font-weight:600"></div><ul id="sl"></ul><div class="tt" id="tt"></div><small id="tn"></small><a class="btn" href="#kontakt" style="margin-top:0">Anfragen</a></div></div>
+<div class="dots"><button type="button" class="on" aria-label="Schritt 1: Fahrzeug">1</button><button type="button" aria-label="Schritt 2: Leistungen">2</button><button type="button" aria-label="Schritt 3: Preis">3</button></div>
+<div class="pstep" id="ps0"><h3>Fahrzeugkategorie</h3><div class="sz" id="sz"></div><p class="szcap" id="szcap" aria-live="polite"></p></div>
+<div class="pstep" id="ps1" hidden><h3>Leistungen wählen</h3><div class="ctx"><span id="ctxv"></span><button type="button" class="lnk" data-go="0">Ändern</button></div><div id="pl"></div><button class="btn" id="pnext" type="button">Weiter</button></div>
+<div class="pstep" id="ps2" hidden><h3>Ihr Preis</h3><div class="sum"><div id="vh" style="font-weight:600"></div><div class="lnks"><button type="button" class="lnk" data-go="0">Fahrzeug ändern</button><button type="button" class="lnk" data-go="1">Leistungen ändern</button></div><ul id="sl"></ul><div class="tt" id="tt"></div><small id="tn"></small><a class="btn" href="#kontakt" style="margin-top:0">Anfragen</a></div></div>
 </div>
 <p class="note">Richtwert inkl. USt., unverbindlich. Der genaue Preis hängt vom Fahrzeugzustand ab und wird nach der Besichtigung genannt.</p>
 </section>
@@ -197,11 +237,11 @@ textarea{resize:vertical;max-width:100%}
 <div class="panel" id="p-wa" role="tabpanel"><form id="form"></form></div>
 <div class="panel" id="p-mail" role="tabpanel" hidden>
 <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
-<a class="call" style="font-size:clamp(20px,5vw,30px)" href="mailto:kontakt@autoaufbereitung.at">kontakt@autoaufbereitung.at</a>
-<a class="btn" id="mailbtn" href="mailto:kontakt@autoaufbereitung.at">E-Mail schreiben</a></div>
+<a class="call" style="font-size:clamp(18px,4.5vw,26px);word-break:break-all" href="mailto:gs.carcare10@gmail.com">gs.carcare10@gmail.com</a>
+<a class="btn" id="mailbtn" href="mailto:gs.carcare10@gmail.com">E-Mail schreiben</a></div>
 <div class="panel" id="p-tel" role="tabpanel" hidden>
 <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div>
-<a class="call" href="tel:+4318900000">+43 1 890 00 00</a><a class="btn" href="tel:+4318900000">Jetzt anrufen</a></div>
+<a class="call" href="tel:+436805020884">0680 502 08 84</a><a class="btn" href="tel:+436805020884">Jetzt anrufen</a></div>
 </section>
 
 <section id="standort"><h2>Standort</h2>
@@ -211,81 +251,221 @@ textarea{resize:vertical;max-width:100%}
 </section>
 </main>
 
-<footer><div class="w"><span>© 2026 Auto Aufbereitung AT e.U.</span><span><a href="impressum.html">Impressum</a><a href="agb.html">AGB</a><a href="datenschutz.html">Datenschutz</a></span></div></footer>
+<footer><div class="w"><span>© 2026 GS CarCare · Inhaber: Sarcevic Mihael</span><span><a href="impressum.html">Impressum</a><a href="agb.html">AGB</a><a href="datenschutz.html">Datenschutz</a></span></div></footer>
 
 
 <script>
-const WA="43660000000"; /* WhatsApp-Nummer ohne +, bitte ersetzen */
-const MAIL="kontakt@autoaufbereitung.at";
+const WA="436805020884";
+const MAIL="gs.carcare10@gmail.com";
 const SV=[
-["Lackpolitur","Entfernt Kratzer, Swirls und leichte Verätzungen, nach Schichtdickenmessung."],
-["Keramikversiegelung","Dauerhafter Schutz gegen Streusalz, Baumharz und UV-Strahlung."],
-["Innenreinigung","Textilien, Leder, Kunststoffe und Geruchsneutralisierung."],
-["Steinschlag & Autoglas","Reparatur von Steinschlägen oder Scheibentausch."],
-["Leasingrückgabe","Vorbereitung auf das Gutachten, um Nachverrechnungen zu vermeiden."],
-["Komplettaufbereitung","Lack, Versiegelung und Innenraum in einem Termin."]];
-const SIZES=[["Kleinwagen","z. B. Polo, Corsa"],["Limousine / Kombi","z. B. Golf, 3er, Octavia"],["SUV / Van","z. B. Tiguan, X5, Bus"]];
-const PR={"Lackpolitur":[350,420,520],"Keramikversiegelung":[590,690,820],"Innenreinigung":[190,240,290],"Komplettaufbereitung":[990,1190,1450]};
-let size=null;
+  ["Innenaufbereitung","Aussaugen, Fußmatten, Kunststoffe & Armaturen, Türverkleidung, Scheiben innen, Kofferraum, Sitze & Geruchsneutralisierung."],
+  ["Außenaufbereitung mit Basiswäsche","Schonende Vorwäsche, Handwäsche, Felgen, Reifenpflege, Trocknen, Scheiben außen & Kunststoffpflege."],
+  ["Lackpolitur 1-Stufig","Glanzauffrischung und Entfernung feiner Swirls und leichter Grauschleier im Lack."],
+  ["Lackpolitur 2-Stufig","Korrektur mittlerer Defekte und feiner Kratzer mit anschließendem Hochglanz-Finish."],
+  ["Lackpolitur 3-Stufig","Maximale Defektkorrektur für tiefere Kratzer inkl. Hochglanz- und Showroom-Finish."],
+  ["Kratzer entfernen","Punktuelle Beseitigung und Ausschleifen tieferer Kratzer im Lack (Preis auf Anfrage)."],
+  ["Teppich- & Sitz-Extraktion","Tiefenreinigende Nass-Sprühextraktion von Teppichen, Fußmatten und Sitzen."],
+  ["Lederreinigung & Pflege","Porentiefe Reinigung des Leders mit anschließender Versiegelung und Nährpflege."],
+  ["Tierhaarentfernung","Gründliche Spezialentfernung hartnäckiger Tierhaare aus Polstern, Teppich und Kofferraum."],
+  ["Motorraum-Reinigung","Fachgerechte Reinigung und Konservierung der Bauteile und Kunststoffe im Motorraum."],
+  ["Bremssattel lackieren","Professionelle Reinigung, Vorbereitung und hitzebeständige Lackierung der Bremssättel."],
+  ["Optische Umbauten","Individuelle Umbauten wie Sportlenkrad, Wabengrill, Diffusor, Stoßstangen oder Seitenschweller."]
+];
+
+const SIZES=[
+  ["Kleinwagen","z. B. Polo, Corsa, Fiesta, Yaris"],
+  ["Kompaktklasse","z. B. Golf, A3, 1er BMW, Focus"],
+  ["Limo / Kombi","z. B. 3er/5er, C-/E-Klasse, Octavia, Passat"],
+  ["SUV","z. B. Tiguan, Q3/Q5, X3, T-Roc"],
+  ["Großer SUV","z. B. X5/X7, Q7/Q8, GLE, Touareg"],
+  ["Van / 7-Sitzer","z. B. Touran, Sharan, V-Klasse, Multivan"],
+  ["Transporter","z. B. Sprinter, Crafter, Vito, Transit"]
+];
+
+const PR={
+  "Innenaufbereitung":[80,90,100,120,140,150,160],
+  "Außenaufbereitung mit Basiswäsche":[25,28,30,35,40,45,50],
+  "Lackpolitur 1-Stufig":[170,185,200,220,250,250,null],
+  "Lackpolitur 2-Stufig":[200,215,230,250,290,290,null],
+  "Lackpolitur 3-Stufig":[230,240,250,290,330,330,null],
+  "Kratzer entfernen":[null,null,null,null,null,null,null],
+  "Teppich- & Sitz-Extraktion":[40,40,40,40,40,40,40],
+  "Lederreinigung & Pflege":[50,50,50,50,50,50,50],
+  "Tierhaarentfernung":[40,40,40,40,40,40,40],
+  "Motorraum-Reinigung":[40,40,40,40,40,40,40],
+  "Bremssattel lackieren":[150,150,150,150,150,150,150],
+  "Optische Umbauten":[null,null,null,null,null,null,null]
+};
+
+let size=null,step=0,tier=0;
+const POL=[SV[2][0],SV[3][0],SV[4][0]];
 const sel=new Set(),$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const list=()=>SV.map(s=>s[0]).filter(n=>sel.has(n));
+const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,".");
+
+function getPriceStr(name,sz){
+  const p=PR[name];
+  if(!p)return "auf Anfrage";
+  if(sz!==null&&sz!==undefined){
+    const val=p[sz];
+    if(typeof val==="number"&&val>0){
+      return (name==="Motorraum-Reinigung"?"":"ab ")+fmt(val)+" €";
+    }
+    return "auf Anfrage";
+  }
+  const nums=p.filter(x=>typeof x==="number");
+  if(nums.length){
+    const min=Math.min(...nums);
+    return (name==="Motorraum-Reinigung"?"":"ab ")+fmt(min)+" €";
+  }
+  return "auf Anfrage";
+}
+
 const ICON='<div class="corner"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>';
-const FACTS=["1–3 Polierstufen · vorab Schichtdickenmessung","Abperlender Schutz · gegen Salz, Harz und UV","Textil · Leder · Kunststoff · Geruch","Reparatur oder Scheibentausch","Gutachten-Vorbereitung · Kostenvermeidung","Lack · Versiegelung · Innenraum"];
-const PIC=["radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.5),transparent 55%),repeating-radial-gradient(circle at 70% 70%,rgba(255,255,255,.12) 0 1px,transparent 1px 8px),linear-gradient(135deg,#2a2d34,#08090b)",
-"radial-gradient(circle at 25% 30%,rgba(255,255,255,.55) 0 6px,transparent 7px),radial-gradient(circle at 60% 55%,rgba(255,255,255,.45) 0 9px,transparent 10px),radial-gradient(circle at 80% 25%,rgba(255,255,255,.4) 0 5px,transparent 6px),radial-gradient(circle at 45% 80%,rgba(255,255,255,.4) 0 7px,transparent 8px),linear-gradient(135deg,#1d3b4f,#0a1a24)",
-"repeating-linear-gradient(90deg,transparent 0 22px,rgba(255,255,255,.1) 22px 24px),linear-gradient(135deg,#7a4a2a,#2b180d)",
-"conic-gradient(from 200deg at 55% 45%,rgba(255,255,255,.55),transparent 8%,rgba(255,255,255,.35) 16%,transparent 24%,rgba(255,255,255,.5) 40%,transparent 48%,rgba(255,255,255,.3) 66%,transparent 74%),linear-gradient(135deg,#6f9bb3,#1c3442)",
-"repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 2px,transparent 2px 22px),linear-gradient(135deg,#4a4d52,#1a1b1d)",
-"linear-gradient(135deg,#e0501c,#7a1f05)"];
-$("#ls").innerHTML=SV.map((s,i)=>`<article class="lr"><div class="lt"><span class="n">0${i+1}</span><h3>${s[0]}</h3><p>${s[1]}</p><small>${FACTS[i]}</small></div><div class="pic" style="background:${PIC[i]}"></div></article>`).join("");
+const FACTS=[
+  "Aussaugen · Scheiben · Sitze · Geruchsneutralisierung",
+  "Vorwäsche · Handwäsche · Felgen & Reifen · Trocknen",
+  "1 Polierstufe · Glanzauffrischung · leichte Swirls",
+  "2 Polierstufen · Defektkorrektur · Hochglanz",
+  "3 Polierstufen · Defektkorrektur · Showroom-Finish",
+  "Punktuelles Ausschleifen · Schichtdickenmessung · auf Anfrage",
+  "Nass-Sprühextraktion · Tiefenhygiene · Polster & Matten",
+  "Porentiefe Reinigung · Imprägnierung & Nährpflege",
+  "Spezialwerkzeuge · Polster, Teppich & Kofferraum",
+  "Schonende Reinigung · Konservierung der Kunststoffe",
+  "Reinigung & Vorbereitung · hitzebeständige Lackierung",
+  "Sportlenkrad · Wabengrill · Diffusor · Stoßstangen"
+];
+
+const PIC=[
+  "repeating-linear-gradient(90deg,transparent 0 22px,rgba(255,255,255,.08) 22px 24px),linear-gradient(135deg,#36393e,#18191c)",
+  "radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.5),transparent 55%),linear-gradient(135deg,#1f4068,#162447)",
+  "radial-gradient(circle at 70% 30%,rgba(255,255,255,.6) 0 4px,transparent 5px),linear-gradient(135deg,#2c3e50,#000000)",
+  "radial-gradient(circle at 60% 40%,rgba(255,255,255,.7) 0 6px,transparent 7px),linear-gradient(135deg,#232526,#414345)",
+  "radial-gradient(circle at 50% 30%,rgba(255,255,255,.8) 0 8px,transparent 9px),radial-gradient(circle at 75% 65%,rgba(255,255,255,.5) 0 4px,transparent 5px),linear-gradient(135deg,#0f2027,#203a43,#2c5364)",
+  "linear-gradient(45deg,transparent 48%,rgba(255,255,255,.6) 50%,transparent 52%),linear-gradient(135deg,#434343,#000000)",
+  "repeating-radial-gradient(circle at 50% 50%,rgba(255,255,255,.1) 0 2px,transparent 2px 8px),linear-gradient(135deg,#3a6073,#16222f)",
+  "repeating-linear-gradient(45deg,transparent 0 12px,rgba(255,255,255,.06) 12px 14px),linear-gradient(135deg,#6d4c41,#2b1b17)",
+  "repeating-linear-gradient(120deg,rgba(255,255,255,.08) 0 2px,transparent 2px 10px),linear-gradient(135deg,#4e342e,#1c120c)",
+  "repeating-linear-gradient(0deg,rgba(255,255,255,.1) 0 2px,transparent 2px 16px),linear-gradient(135deg,#212121,#0d0d0d)",
+  "radial-gradient(circle at 65% 35%,rgba(255,255,255,.45),transparent 40%),linear-gradient(135deg,#c0392b,#641e16)",
+  "repeating-linear-gradient(60deg,rgba(255,255,255,.08) 0 4px,transparent 4px 14px),linear-gradient(135deg,#d35400,#2c3e50)"
+];
+
+$("#ls").innerHTML=SV.map((s,i)=>`<article class="lr"><div class="lt"><span class="n">${String(i+1).padStart(2,"0")}</span><h3>${s[0]}</h3><p>${s[1]}</p><small>${FACTS[i]}</small></div><div class="pic" style="background:${PIC[i]}"></div></article>`).join("");
 $("#form").innerHTML=`<label>Name<input name="n" required autocomplete="name"></label>
 <label>Fahrzeug (Modell, Baujahr)<input name="v" required></label>
 <div class="lb">Leistungen<small class="fi" id="fi"></small><div class="chips">${SV.map((s,i)=>`<label><input type="checkbox" data-i="${i}"><span>${s[0]}</span></label>`).join("")}</div></div>
 <label>Nachricht<textarea name="m" rows="3" placeholder="Wunschtermin, Zustand, Fragen"></textarea></label>
 <button class="btn" type="submit">Per WhatsApp senden</button>`;
+
 let atForm=false;
 function sync(){
- SV.forEach((s,i)=>{$(`.chips input[data-i="${i}"]`).checked=sel.has(s[0])});
- const n=sel.size;
- $("#fi").textContent=n?n+" gewählt – Mehrfachauswahl möglich":"Mehrfachauswahl möglich";
- renderPrice();
- $("#mailbtn").href=`mailto:${MAIL}?subject=${encodeURIComponent("Anfrage Fahrzeugaufbereitung")}&body=${encodeURIComponent("Guten Tag,\n\nich interessiere mich für folgende Leistung(en): "+(list().join(", ")||"")+"\nFahrzeug (Modell, Baujahr): \nWunschtermin: \n\nMit freundlichen Grüßen")}`;
+  SV.forEach((s,i)=>{const inp=$(`.chips input[data-i="${i}"]`);if(inp)inp.checked=sel.has(s[0])});
+  const n=sel.size;
+  $("#fi").textContent=n?n+" gewählt – Mehrfachauswahl möglich":"Mehrfachauswahl möglich";
+  renderPrice();
+  const vhName=size!==null?SIZES[size][0]:"Noch nicht gewählt";
+  $("#mailbtn").href=`mailto:${MAIL}?subject=${encodeURIComponent("Anfrage GS CarCare Fahrzeugaufbereitung")}&body=${encodeURIComponent("Guten Tag Herr Sarcevic,\n\nich interessiere mich für folgende Leistung(en): "+(list().join(", ")||"–")+"\nFahrzeugkategorie: "+vhName+"\nFahrzeug (Modell, Baujahr): \nWunschtermin: \n\nMit freundlichen Grüßen")}`;
 }
-const toggle=i=>{const n=SV[i][0];sel.has(n)?sel.delete(n):sel.add(n);sync()};
+const toggle=i=>{const n=SV[i][0];
+  if(sel.has(n))sel.delete(n);else{if(POL.includes(n))POL.forEach(p=>sel.delete(p));sel.add(n)}
+  sync()};
+const togglePol=()=>{const on=POL.some(p=>sel.has(p));POL.forEach(p=>sel.delete(p));if(!on)sel.add(POL[tier]);sync()};
+const setTier=t=>{tier=t;POL.forEach(p=>sel.delete(p));sel.add(POL[t]);sync()};
 $$(".chips input").forEach(c=>c.onchange=()=>toggle(+c.dataset.i));
 new IntersectionObserver(e=>{atForm=e[0].isIntersecting;sync()},{threshold:.15}).observe($("#kontakt"));
 $("#form").addEventListener("submit",e=>{e.preventDefault();
- const d=Object.fromEntries(new FormData(e.target));
- const txt=`Anfrage Auto Aufbereitung AT\nName: ${d.n}\nFahrzeug: ${d.v}\nLeistungen: ${list().join(", ")||"noch offen"}\nNachricht: ${d.m||"–"}`;
- window.open(`https://wa.me/${WA}?text=${encodeURIComponent(txt)}`,"_blank","noopener");
+  const d=Object.fromEntries(new FormData(e.target));
+  const vhName=size!==null?SIZES[size][0]:"Nicht angegeben";
+  const txt=`Anfrage GS CarCare\nName: ${d.n}\nFahrzeug: ${d.v}\nKategorie: ${vhName}\nLeistungen: ${list().join(", ")||"noch offen"}\nNachricht: ${d.m||"–"}`;
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(txt)}`,"_blank","noopener");
 });
 
-/* Preisrechner */
-const CAR=['<path d="M5 22v-5l7-2 5-6h18l8 6 9 2v5"/>','<path d="M3 22v-5l9-2 7-6h22l8 6 9 2v5"/>','<path d="M4 22V11l5-4h34l9 6 6 2v7"/>'];
-const fmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,".");
-$("#sz").innerHTML=SIZES.map((z,i)=>`<button type="button" class="tile" data-z="${i}" style="--d:${i}" aria-pressed="false"><svg viewBox="0 0 64 30">${CAR[i]}<circle cx="19" cy="23" r="3.5"/><circle cx="47" cy="23" r="3.5"/></svg><b>${z[0]}</b><small>${z[1]}</small></button>`).join("");
-$("#pl").innerHTML=SV.map((x,i)=>`<button type="button" class="card" aria-pressed="false" style="--d:${i}">${ICON}<b>${x[0]}</b><span>${x[1]}</span><div class="pick"><i class="tick"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></i><em style="font-style:normal">Auswählen</em></div></button>`).join("");
-$$("#pl .card").forEach((c,i)=>{c.onclick=()=>toggle(i)});
+/* Preisrechner - 7 Fahrzeugkategorien */
+const CAR=[
+  '<path d="M6 22v-5l6-2 5-6h14l6 7 2 2 19 0v4"/>',
+  '<path d="M4 22v-5l8-2 6-6h18l7 7 3 2 12 0v4"/>',
+  '<path d="M3 22v-5l10-2 6-6h20l9 5 10 2 0 6"/>',
+  '<path d="M4 22v-8l7-3 6-5h20l8 7 13 2v7"/>',
+  '<path d="M3 22v-9l7-3 6-5h24l9 8 9 2v7"/>',
+  '<path d="M3 22v-8l6-6 8-3h26l9 7 6 3v7"/>',
+  '<path d="M3 22V7l4-2h40l10 8 4 2v7"/>'
+];
+
+$("#sz").innerHTML=SIZES.map((z,i)=>`<button type="button" class="tile" data-z="${i}" title="${z[1]}" style="--d:${i}" aria-pressed="false"><svg viewBox="0 0 64 30">${CAR[i]}<circle cx="19" cy="23" r="3.5"/><circle cx="47" cy="23" r="3.5"/></svg><b>${z[0].replace("Kompaktklasse","Kompakt&shy;klasse")}</b><small>${z[1]}</small></button>`).join("");
+const GR=[["Aufbereitung",[0,1]],["Lackpflege",["pol",5]],["Extras & Umbauten",[6,7,8,9,10,11]]];
+let di=0;
+const cardHTML=k=>{
+  const pol=k==="pol",x=pol?SV[2]:SV[k],d=di++;
+  return `<div class="card" data-k="${k}" style="--d:${d}">${ICON}<button type="button" class="ct" aria-pressed="false"><b>${pol?"Lackpolitur":x[0]}</b><span class="cd">${x[1]}</span></button>`
+  +(pol?`<div class="tiers" role="group" aria-label="Politurstufe">${[0,1,2].map(t=>`<button type="button" data-t="${t}" aria-pressed="false">Stufe ${t+1}<small></small></button>`).join("")}</div>`:"")
+  +`<div class="c-price"></div><div class="pick"><i class="tick"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></i><em style="font-style:normal">Auswählen</em></div></div>`;
+};
+$("#pl").innerHTML=GR.map(g=>`<div class="pgrp"><h4 class="gh">${g[0]}</h4><div class="cards">${g[1].map(cardHTML).join("")}</div></div>`).join("");
+$("#pl").addEventListener("click",e=>{
+  const tb=e.target.closest(".tiers button");
+  if(tb){setTier(+tb.dataset.t);return}
+  const ct=e.target.closest(".ct");if(!ct)return;
+  const k=ct.closest(".card").dataset.k;
+  k==="pol"?togglePol():toggle(+k);
+});
+const cap=$("#szcap"),capDef="Wählen Sie Ihre Fahrzeugklasse – Beispielmodelle sehen Sie beim Darüberfahren.";
+const capSet=i=>{const j=i==null?size:i;cap.textContent=j==null?capDef:SIZES[j][0]+": "+SIZES[j][1]};
+$$("#sz .tile").forEach(t=>{const i=+t.dataset.z;["mouseenter","focus"].forEach(ev=>t.addEventListener(ev,()=>capSet(i)));["mouseleave","blur"].forEach(ev=>t.addEventListener(ev,()=>capSet()))});
+capSet();
+
 let shown=0;
 function count(to){const from=shown,t0=performance.now();shown=to;(function f(t){const k=Math.min(1,(t-t0)/350),v=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));$("#tt").textContent=to?"ab "+fmt(v)+" €":"";if(k<1)requestAnimationFrame(f)})(t0)}
+
+const lbl=n=>{const i=POL.indexOf(n);return i>-1?"Lackpolitur · Stufe "+(i+1):n};
+const tierPrice=t=>{if(size===null)return"";const v=PR[POL[t]][size];return typeof v==="number"&&v>0?"ab "+fmt(v)+" €":"Anfrage"};
+function upDots(){const d=$$(".dots button");d[1].disabled=size===null;d[2].disabled=size===null||!sel.size;d.forEach((b,i)=>b.classList.toggle("on",i<=step))}
 function renderPrice(){
- $$("[data-z]").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.z===size));
- $$("#pl .card").forEach((c,i)=>{const on=sel.has(SV[i][0]);c.classList.toggle("sel",on);c.setAttribute("aria-pressed",on);c.querySelector("em").textContent=on?"Ausgewählt":"Auswählen"});
- if(size===null){$("#pnext").disabled=!sel.size;return}
- let tot=0,ask=false;const L=list();
- $("#vh").textContent=SIZES[size][0];$("#pnext").disabled=!sel.size;
- $("#sl").innerHTML=L.length?L.map(n=>{const p=PR[n];if(p)tot+=p[size];else ask=true;return `<li>${n}<span>${p?"ab "+fmt(p[size])+" €":"auf Anfrage"}</span></li>`}).join(""):'<li class="e">Noch keine Leistung gewählt</li>';
- if(tot)count(tot);else{shown=0;$("#tt").textContent=L.length?"auf Anfrage":"–"}
- $("#tn").textContent=tot&&ask?"zzgl. Leistungen auf Anfrage":""}
+  $$("[data-z]").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.z===size));
+  const pi=POL.findIndex(p=>sel.has(p));if(pi>-1)tier=pi;
+  $$("#pl .card").forEach(c=>{
+    const k=c.dataset.k,pol=k==="pol",on=pol?pi>-1:sel.has(SV[+k][0]),nm=pol?POL[tier]:SV[+k][0];
+    c.classList.toggle("sel",on);
+    c.querySelector(".ct").setAttribute("aria-pressed",on);
+    c.querySelector("em").textContent=on?"Ausgewählt":"Auswählen";
+    c.querySelector(".c-price").textContent=getPriceStr(nm,size);
+    if(pol){
+      c.querySelector(".cd").textContent=SV[2+tier][1];
+      c.querySelectorAll(".tiers button").forEach((b,t)=>{b.setAttribute("aria-pressed",t===tier);b.querySelector("small").textContent=tierPrice(t)});
+    }
+  });
+  const L=list();let tot=0,ask=false;
+  const rows=L.map(n=>{
+    const p=PR[n],v=size===null||!p?null:p[size];let pl;
+    if(typeof v==="number"&&v>0){tot+=v;pl=(n==="Motorraum-Reinigung"?"":"ab ")+fmt(v)+" €"}else{ask=true;pl="auf Anfrage"}
+    return `<li>${lbl(n)}<span>${pl}</span></li>`;
+  });
+  const nx=$("#pnext");nx.disabled=!sel.size;
+  nx.textContent=sel.size?`Weiter · ${sel.size} ${sel.size===1?"Leistung":"Leistungen"}`+(tot?` · ab ${fmt(tot)} €`:""):"Leistung wählen";
+  upDots();
+  if(size===null)return;
+  $("#vh").textContent=SIZES[size][0]+" ("+SIZES[size][1]+")";
+  $("#ctxv").textContent=SIZES[size][0];
+  capSet();
+  $("#sl").innerHTML=rows.length?rows.join(""):'<li class="e">Noch keine Leistung gewählt</li>';
+  if(tot>0)count(tot);else{shown=0;$("#tt").textContent=L.length?"auf Anfrage":"–"}
+  $("#tn").textContent=tot>0&&ask?"zzgl. Leistungen auf Anfrage (z. B. Kratzer entfernen / Umbauten)":(tot>0?"Richtwert unverbindlich, abhängig vom Fahrzeugzustand":"");
+}
+
 $$("[data-z]").forEach(b=>b.onclick=()=>{size=+b.dataset.z;renderPrice();go(1)});
-let step=0;
-function go(n){step=n;[0,1,2].forEach(i=>$("#ps"+i).hidden=i!==n);$("#back").hidden=n===0;$$(".dots i").forEach((d,i)=>d.classList.toggle("on",i<=n))}
+function go(n){
+  if(n===1&&size===null)return;
+  if(n===2&&(size===null||!sel.size))return;
+  step=n;[0,1,2].forEach(i=>$("#ps"+i).hidden=i!==n);$("#back").hidden=n===0;upDots();
+}
 $("#back").onclick=()=>go(step-1);
 $("#pnext").onclick=()=>{if(sel.size)go(2)};
+$$(".dots button").forEach((b,i)=>b.onclick=()=>go(i));
+$$("[data-go]").forEach(b=>b.onclick=()=>go(+b.dataset.go));
 sync();
 const tabs=$$(".tabs button");
 tabs.forEach(b=>b.addEventListener("click",()=>tabs.forEach(t=>{const on=t===b;t.setAttribute("aria-selected",on);document.getElementById(t.getAttribute("aria-controls")).hidden=!on})));
-
 </script>
 </body>
 </html>

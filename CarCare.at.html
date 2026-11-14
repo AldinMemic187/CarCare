@@ -75,14 +75,8 @@ input:focus,textarea:focus{outline:2px solid var(--fg);outline-offset:1px}
 #bar a{padding:9px 18px;border-radius:99px;background:var(--bg);color:var(--fg);font-weight:600;text-decoration:none}
 footer{border-top:1px solid var(--line);padding:28px 0 36px;font-size:14px;color:var(--mut)}
 footer .w{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
-footer button{background:none;border:0;padding:0;margin-left:18px;color:inherit;font:inherit;cursor:pointer}
-footer button:hover{color:var(--fg);text-decoration:underline}
-dialog{border:1px solid var(--line);background:var(--card);color:var(--fg);width:min(640px,92vw);max-height:84vh;border-radius:14px;padding:26px;overflow:auto}
-dialog::backdrop{background:rgba(0,0,0,.55)}
-dialog h3{font-size:22px;margin-bottom:8px}
-dialog h4{margin:16px 0 2px;font-size:14px}
-dialog p{margin:0;font-size:14px;color:var(--mut)}
-dialog .btn{margin-top:22px}
+footer a, footer button{background:none;border:0;padding:0;margin-left:18px;color:inherit;font:inherit;text-decoration:none;cursor:pointer}
+footer a:hover, footer button:hover{color:var(--fg);text-decoration:underline}
 .pc{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:start}
 .pc h3{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--mut);margin:0 0 12px;font-weight:600}
 .grp+.grp{margin-top:30px}
@@ -157,8 +151,7 @@ section h2{font-size:22px;margin-bottom:16px}
 .sum .tt{font-size:34px}
 .tabs button{padding:12px 4px;font-size:14px}
 footer .w{flex-direction:column;align-items:flex-start}
-footer button{margin:0 18px 0 0}
-dialog{padding:20px}
+footer a, footer button{margin:0 18px 0 0}
 }
 @media(max-width:360px){.logo span{font-size:14px}.logo img{height:40px}.hb{padding:8px 12px}}
 textarea{resize:vertical;max-width:100%}
@@ -218,8 +211,7 @@ textarea{resize:vertical;max-width:100%}
 </section>
 </main>
 
-<footer><div class="w"><span>© 2026 Auto Aufbereitung AT e.U.</span><span><button data-l="impressum">Impressum</button><button data-l="agb">AGB</button><button data-l="datenschutz">Datenschutz</button></span></div></footer>
-<dialog id="dlg"><div id="db"></div><button class="btn" id="close" type="button">Schließen</button></dialog>
+<footer><div class="w"><span>© 2026 Auto Aufbereitung AT e.U.</span><span><a href="impressum.html">Impressum</a><a href="agb.html">AGB</a><a href="datenschutz.html">Datenschutz</a></span></div></footer>
 
 
 <script>
@@ -294,14 +286,6 @@ sync();
 const tabs=$$(".tabs button");
 tabs.forEach(b=>b.addEventListener("click",()=>tabs.forEach(t=>{const on=t===b;t.setAttribute("aria-selected",on);document.getElementById(t.getAttribute("aria-controls")).hidden=!on})));
 
-const LEGAL={
-impressum:["Impressum","<h4>Medieninhaber und Betreiber</h4><p>Auto Aufbereitung AT e.U., Inhaber: [Vorname Nachname], Carlbergergasse 45, 1230 Wien</p><h4>Kontakt</h4><p>Tel.: +43 1 890 00 00 · E-Mail: kontakt@autoaufbereitung.at</p><h4>Unternehmen</h4><p>Gewerbe: Kraftfahrzeugreinigung und -aufbereitung · UID: [ATU…] · Mitglied der WKO · Aufsichtsbehörde: Magistratisches Bezirksamt für den 23. Bezirk · Vorschriften: Gewerbeordnung (www.ris.bka.gv.at)</p>"],
-agb:["Allgemeine Geschäftsbedingungen","<h4>1 Vertragsschluss</h4><p>Anfragen sind unverbindlich. Der Vertrag kommt nach Besichtigung des Fahrzeugs und Bestätigung des Auftrags zustande.</p><h4>2 Übernahme und Vorschäden</h4><p>Vor Arbeitsbeginn wird der Zustand gemeinsam dokumentiert. Auf Vorschäden, die durch fachgerechte Arbeit sichtbarer werden können, wird vorab hingewiesen.</p><h4>3 Wertsachen</h4><p>Bitte entfernen Sie Wertgegenstände und lose Dokumente aus dem Fahrzeug.</p><h4>4 Terminabsage</h4><p>Termine bitte mindestens 24 Stunden vorher absagen. Bei kurzfristigem Ausfall kann ein angemessener Aufwandersatz verrechnet werden.</p><h4>5 Abnahme und Zahlung</h4><p>Die Abnahme erfolgt bei Übergabe, sichtbare Mängel sind sofort anzuzeigen. Zahlung bei Abholung in bar oder per Karte.</p><h4>6 Recht</h4><p>Es gilt österreichisches Recht. Für Verbraucher gelten die zwingenden Bestimmungen des Konsumentenschutzgesetzes.</p>"],
-datenschutz:["Datenschutz","<h4>Verantwortlicher</h4><p>Auto Aufbereitung AT e.U., Carlbergergasse 45, 1230 Wien, kontakt@autoaufbereitung.at</p><h4>WhatsApp-Formular</h4><p>Ihre Eingaben werden nur in Ihrem Browser zu einer Nachricht zusammengesetzt und an WhatsApp (Meta Platforms Ireland Ltd., Dublin) übergeben. Auf unserem Server werden sie nicht gespeichert (Art. 6 Abs. 1 lit. b DSGVO). Der E-Mail-Link öffnet lediglich Ihr E-Mail-Programm.</p><h4>Hosting</h4><p>Der Hosting-Anbieter verarbeitet technisch notwendige Server-Logs (u. a. IP-Adresse, Zeitpunkt), Art. 6 Abs. 1 lit. f DSGVO. Wir verwenden keine Cookies, kein Tracking und keine externen Schriften.</p><h4>Ihre Rechte</h4><p>Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch. Beschwerden an die Datenschutzbehörde, Barichgasse 40–42, 1030 Wien, www.dsb.gv.at.</p>"]};
-const dlg=$("#dlg");
-$$("[data-l]").forEach(b=>b.onclick=()=>{const l=LEGAL[b.dataset.l];$("#db").innerHTML=`<h3>${l[0]}</h3>${l[1]}`;dlg.showModal()});
-$("#close").onclick=()=>dlg.close();
-dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
 </script>
 </body>
 </html>

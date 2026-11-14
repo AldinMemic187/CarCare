@@ -303,6 +303,16 @@ header.sc{transform:none;visibility:visible;transition-delay:0s}
 .hmeta{margin-bottom:22px}
 }
 @media(prefers-reduced-motion:reduce){.wv,.hbg::after,.hero-in>*,.pcard.pulse,#svwrap{animation:none!important}}
+
+/* ---- Fix: Klassenauswahl mobil ---- */
+@media(max-width:640px){
+.sz{grid-template-columns:minmax(0,1fr);gap:8px}
+.tile{grid-template-columns:64px minmax(0,1fr);column-gap:12px;min-width:0;width:100%;padding:12px 14px;text-align:left}
+.tile svg{width:64px;height:auto;max-height:30px;justify-self:start}
+.tile b,.tile small{min-width:0;overflow-wrap:anywhere;hyphens:auto}
+.tile b{font-size:16px;line-height:1.25;align-self:end}
+.tile small{font-size:13px;line-height:1.35;align-self:start}
+}
 textarea{resize:vertical;max-width:100%}
 .ic{width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;margin:0 auto 14px}
 .ic svg,.tabs svg{stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}

@@ -405,6 +405,7 @@ header .w{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max
 @media (max-width:360px){.w,header .w{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}.hb{padding:8px 12px;font-size:14px}.logo span{font-size:14px}}
 .logo span{flex:none}
 @media (max-width:640px){header nav{display:none}}
+@media (max-width:640px){header{transform:none;visibility:visible}}
 @media (max-width:350px){.logo span{display:none}}
 
 /* Kontaktformular: Titel buendig, "optional" als schlichter Hinweis */
@@ -457,6 +458,39 @@ section{padding:28px 0}
 #pnext{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:20;min-height:46px;box-shadow:0 10px 26px -6px rgba(0,0,0,.35)}
 .map{height:240px}
 }
+
+/* ---- v7: Qualität & Google-Rezensionen ---- */
+.qs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:14px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.qi{display:grid;place-items:center;width:44px;height:44px;border-radius:10px;margin-bottom:14px;background:color-mix(in srgb,var(--fg) 7%,transparent)}
+.qi svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.q h3{font-size:18px;margin-bottom:6px}
+.q p{margin:0;color:var(--mut);font-size:15px}
+@media (max-width:640px){.q{padding:18px}.q h3{font-size:17px}.q p{font-size:14.5px}}
+.rv-sum{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.gtile{flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.ico-g{width:26px;height:26px}
+.rv-meta{display:grid;gap:2px;min-width:0}
+.rv-score{display:flex;align-items:center;gap:8px}
+.rv-score b{font-size:24px;line-height:1}
+.stars{color:#f5a623;letter-spacing:1px;font-size:16px;line-height:1;white-space:nowrap}
+.rv-cnt{font-size:14px;color:var(--mut)}
+.rv-sum .btn{margin-left:auto;min-height:44px;padding:10px 18px;font-size:15px}
+@media (max-width:640px){.rv-sum .btn{margin-left:0;width:100%}}
+.rv-band{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.rv-track{display:flex;width:max-content;animation:rvm var(--rv-d,40s) linear infinite;will-change:transform}
+@keyframes rvm{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
+.rv-set{display:flex;gap:14px;padding-right:14px}
+.rv-band:hover .rv-track,.rv-band:focus-within .rv-track,.rv-band.off .rv-track{animation-play-state:paused}
+.rc{flex:none;width:min(300px,78vw);display:flex;flex-direction:column;gap:10px;padding:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;white-space:normal;hyphens:auto;overflow-wrap:break-word}
+.rc-h{display:flex;align-items:center;gap:10px;min-width:0}
+.rc-av{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--acc);color:var(--onacc);font-weight:700}
+.rc-n{display:grid;gap:3px;min-width:0;flex:1}
+.rc-n b{font-size:15px;line-height:1.2;overflow-wrap:break-word}
+.rc-n .stars{font-size:14px}
+.rc-g{flex:none;width:20px;height:20px;display:block}.rc-g svg{width:20px;height:20px;display:block}
+.rc p{margin:0;font-size:14.5px;line-height:1.5;color:var(--fg)}
+@media (prefers-reduced-motion:reduce){.rv-track{animation:none;width:auto}.rv-band{overflow-x:auto;-webkit-mask-image:none;mask-image:none;scroll-snap-type:x mandatory}.rv-set{scroll-snap-align:start}.rv-set.dup{display:none}}
 </style>
 </head>
 <body>
@@ -479,6 +513,13 @@ section{padding:28px 0}
 
 <section id="leistungen"><h2>Leistungen</h2><div class="ls" id="ls"></div></section>
 
+<section id="qualitaet"><h2>Qualität</h2>
+<div class="qs">
+<article class="q"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span><h3>Kundenzufriedenheit</h3><p>Ihr Fahrzeug und Ihre Wünsche stehen im Mittelpunkt – von der Beratung bis zur Übergabe.</p></article>
+<article class="q"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.7s6 6.3 6 10.8a6 6 0 0 1-12 0C6 9 12 2.7 12 2.7z"/></svg></span><h3>Saubere Arbeitsweise</h3><p>Schonende Verfahren, hochwertige Pflegeprodukte und Sorgfalt bei jedem Detail.</p></article>
+<article class="q"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span><h3>Zufriedenheitsgarantie</h3><p>Nicht zufrieden? Wir bessern nach, bis das Ergebnis passt.</p></article>
+</div></section>
+
 <section id="preise"><h2>Preise</h2>
 <div class="pcard">
 <button class="back" id="back" type="button" aria-label="Zurück" hidden><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
@@ -488,6 +529,11 @@ section{padding:28px 0}
 <div class="pstep" id="ps2" hidden><h3>Ihr Preis</h3><div class="sum"><div id="vh" style="font-weight:600"></div><div class="lnks"><button type="button" class="lnk" data-go="0">Fahrzeug ändern</button><button type="button" class="lnk" data-go="1">Leistungen ändern</button></div><ul id="sl"></ul><div class="tt" id="tt"></div><small id="tn"></small><a class="btn" id="wa" href="#" target="_blank" rel="noopener"><svg class="ico-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.25-1.48-1.39-1.73-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.18-.48-.3z"/></svg>Per WhatsApp anfragen</a><a class="btn o2" href="tel:+436805020884"><svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Jetzt anrufen</a><div class="or"><span>oder</span></div><a class="btn o3" href="#kontakt"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Kontaktformular nutzen</a></div></div>
 </div>
 <p class="note"><span class="dl">Richtwert inkl. USt., unverbindlich. Der genaue Preis hängt vom Fahrzeugzustand ab und wird nach der Besichtigung genannt.</span><span class="ds">Richtwert inkl. USt., unverbindlich. Genauer Preis nach Besichtigung.</span></p>
+</section>
+
+<section id="bewertungen" hidden><h2>Bewertungen</h2>
+<div class="rv-sum"><span class="gtile"><svg class="ico-g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></span><div class="rv-meta"><div class="rv-score"><b id="rvavg"></b><span class="stars" id="rvst" aria-hidden="true"></span></div><span class="rv-cnt" id="rvcnt"></span></div><a class="btn o" id="rvlink" href="#" target="_blank" rel="noopener">Alle Rezensionen auf Google</a></div>
+<div class="rv-band" id="rvband" aria-label="Google-Rezensionen"><div class="rv-track" id="rvtrack"></div></div>
 </section>
 
 <section id="kontakt"><h2>Kontakt</h2>
@@ -757,6 +803,36 @@ $("#back").onclick=()=>go(step-1);
 $("#pnext").onclick=()=>{if(sel.size)go(2)};
 $$(".dots button").forEach((b,i)=>b.onclick=()=>go(i));
 $$("[data-go]").forEach(b=>b.onclick=()=>go(+b.dataset.go));
+
+/* Google-Rezensionen */
+const GGL={url:"https://www.google.com/searchviewer/10?svid=CCYSESoPCg0vZy8xMXAyOG0zNDR3GAo",count:null,anon:true};
+/* Format je Rezension: ["Name", Sterne (1-5), "Text"] – Text bitte unverändert aus Google kopieren */
+const REVIEWS=[];
+(function(){
+  const sec=$("#bewertungen");if(!sec||!REVIEWS.length)return;
+  const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const nm=n=>{const q=n.trim().split(/\s+/);return GGL.anon&&q.length>1?q[0]+" "+q[q.length-1][0].toUpperCase()+".":q.join(" ")};
+  const stars=n=>"★".repeat(n)+"☆".repeat(5-n);
+  const G=sec.querySelector(".ico-g").outerHTML;
+  const avg=REVIEWS.reduce((a,r)=>a+r[1],0)/REVIEWS.length,cnt=GGL.count||REVIEWS.length;
+  $("#rvavg").textContent=avg.toFixed(1).replace(".",",");
+  $("#rvst").textContent=stars(Math.round(avg));
+  $("#rvcnt").textContent=cnt+(cnt===1?" Google-Rezension":" Google-Rezensionen");
+  $("#rvlink").href=GGL.url;
+  const card=(r,dup)=>`<article class="rc"${dup?' aria-hidden="true"':""}><div class="rc-h"><span class="rc-av" aria-hidden="true">${esc(nm(r[0])[0])}</span><div class="rc-n"><b>${esc(nm(r[0]))}</b><span class="stars" aria-label="${r[1]} von 5 Sternen">${stars(r[1])}</span></div><span class="rc-g">${G}</span></div><p>${esc(r[2])}</p></article>`;
+  const band=$("#rvband"),tr=$("#rvtrack");
+  const build=()=>{
+    tr.innerHTML='<div class="rv-set">'+REVIEWS.map(r=>card(r,false)).join("")+'</div>';
+    const set=tr.firstChild,w=band.clientWidth;let k=0;
+    while(set.scrollWidth<w*1.2&&k++<8)set.insertAdjacentHTML("beforeend",REVIEWS.map(r=>card(r,true)).join(""));
+    const sw=set.scrollWidth;
+    tr.insertAdjacentHTML("beforeend",'<div class="rv-set dup" aria-hidden="true">'+set.innerHTML+'</div>');
+    tr.style.setProperty("--rv-d",Math.max(24,sw/45)+"s");
+  };
+  sec.hidden=false;build();
+  let t;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(build,250)});
+  new IntersectionObserver(([e])=>band.classList.toggle("off",!e.isIntersecting)).observe(band);
+})();
 /* Header, Hero, Video */
 const hd=document.querySelector("header"),hero=$(".hero"),hv=$("#hv");
 new IntersectionObserver(([e])=>hd.classList.toggle("sc",!e.isIntersecting&&e.boundingClientRect.top<0)).observe($("#sent"));

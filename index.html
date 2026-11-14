@@ -167,7 +167,7 @@ footer a, footer button{margin:0 18px 0 0}
 .pstep-hdr h3{margin:0 0 6px}
 .szcap{margin:0;min-height:1.5em;color:var(--mut);font-size:14.5px;line-height:1.45}
 .szcap strong{color:var(--fg);font-weight:600}
-@media(min-width:901px){
+@media(min-width:901px) and (hover:hover) and (pointer:fine){
 .sz{grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
 .tile{align-items:center;text-align:center;gap:2px;padding:14px 4px 12px}
 .tile svg{width:58px;height:27px;margin-bottom:6px}
@@ -327,7 +327,7 @@ header.sc{transform:none;visibility:visible;transition-delay:0s}
 .sz{grid-template-columns:minmax(0,1fr);gap:8px}
 .tile{grid-template-columns:64px minmax(0,1fr);column-gap:12px;min-width:0;width:100%;padding:12px 14px;text-align:left}
 .tile svg{width:64px;height:auto;max-height:30px;justify-self:start}
-.tile b,.tile small{min-width:0;overflow-wrap:anywhere;hyphens:auto}
+.tile b,.tile small{min-width:0;overflow-wrap:break-word;hyphens:auto}
 .tile b{font-size:16px;line-height:1.25;align-self:end}
 .tile small{font-size:13px;line-height:1.35;align-self:start}
 }
@@ -377,6 +377,86 @@ textarea{resize:vertical;max-width:100%}
 .term-badge svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .map{width:100%;height:380px;border:1px solid var(--line);border-radius:16px;background:var(--card);margin-top:22px;display:block}
 @media(max-width:640px){.map{height:300px;border-radius:14px}}
+
+/* ---- v6: Mobil (Hoch- & Querformat), Header-Button, Tags, Kontakt ---- */
+.ds{display:none!important}
+@media (max-width:640px),(orientation:landscape) and (max-height:520px){.dl{display:none!important}.ds{display:inline!important}.lt small.facts{display:none}}
+@media (max-width:900px),(hover:none){.szcap{display:none}}
+main,.hero,footer{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.w{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+header{padding-left:0;padding-right:0}
+.cards{grid-template-columns:repeat(auto-fill,minmax(min(250px,100%),1fr))}
+.sz{grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr))}
+@media (min-width:901px) and (hover:hover) and (pointer:fine){.sz{grid-template-columns:repeat(7,minmax(0,1fr))}}
+@media (max-width:640px){.sz{grid-template-columns:minmax(0,1fr)}}
+.lt,.lt h3,.lt p,.card b,.card .cd,.tile b,.tile small,.sum li,.ctx span,.cfg-hint,.chips span{min-width:0;overflow-wrap:break-word}
+
+/* Einheitliche Button-Form (10px) */
+.btn,.hb,.hero .btn,.sum .lnks .lnk,.ctx .lnk,#svwrap .lnk,.back,.dots button,.tiers,.chips span,.tabs,.tile{border-radius:10px}
+.tiers button,.tabs button{border-radius:0}
+
+/* Header: "Preis berechnen" nur nach dem Scrollen, gleiches Design wie .btn */
+.hb{padding:10px 18px;min-height:42px;border-radius:10px;background:var(--acc);color:var(--onacc);font-size:15px;font-weight:600;line-height:1.2;box-shadow:none;transition:opacity .3s,visibility 0s,transform .18s cubic-bezier(.16,1,.3,1),box-shadow .18s ease,background .2s}
+header:not(.sc) .hb{background:var(--acc);color:var(--onacc);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-4px);transition:opacity .2s,visibility 0s .2s,transform .2s}
+.hb:hover{transform:translateY(-2px);box-shadow:0 6px 20px -4px rgba(0,0,0,.28)}
+.hb:active{transform:translateY(1px) scale(.98);box-shadow:0 2px 6px -2px rgba(0,0,0,.2)}
+header .w{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+@media (max-width:640px){.w,header .w{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+@media (max-width:360px){.w,header .w{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}.hb{padding:8px 12px;font-size:14px}.logo span{font-size:14px}}
+.logo span{flex:none}
+@media (max-width:640px){header nav{display:none}}
+@media (max-width:350px){.logo span{display:none}}
+
+/* Kontaktformular: Titel buendig, "optional" als schlichter Hinweis */
+#kontakt .flabel,#kontakt .lb{justify-items:stretch;text-align:left}
+.flabel-t{justify-content:flex-start;flex-wrap:wrap;gap:2px 6px;width:100%}
+.flabel .req{margin-left:0}
+.flabel .opt{font-size:13px;font-weight:400;color:var(--mut);background:none;padding:0;border-radius:0}
+#kontakt .chips{justify-content:flex-start}
+.chips label{max-width:100%}
+.chips span{text-align:left}
+#svwrap .lnk{justify-self:start}
+#kontakt input:not([type=checkbox]),#kontakt textarea{min-width:0;text-overflow:ellipsis}
+
+/* Standort: Terminhinweis */
+.loc-head{max-width:100%;text-align:center}
+.loc-head b{overflow-wrap:break-word}
+.term{display:flex;align-items:center;gap:12px;max-width:440px;margin:6px auto 0;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-align:left}
+.term-ic{flex:none;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--fg) 7%,transparent)}
+.term-ic svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.term,.term *{hyphens:manual;-webkit-hyphens:manual}
+.mapov span{border-radius:10px}
+.term b{display:block;font-size:15px;line-height:1.3;color:var(--fg)}
+.term .t2{display:block;margin-top:2px;font-size:13.5px;line-height:1.4;color:var(--mut)}
+
+/* Mobil Hochformat */
+@media (max-width:640px){
+.hero h1{font-size:clamp(28px,9vw,40px)}
+.lead{font-size:17px}
+.pic{height:96px}
+.lt{padding:18px}
+.lt h3{font-size:19px}
+}
+
+/* Querformat auf Smartphones */
+@media (orientation:landscape) and (max-height:520px){
+html{scroll-padding-top:calc(56px + env(safe-area-inset-top,0px))}
+header .w{height:50px}
+.logo img{height:38px}
+.hero{min-height:100vh;min-height:100svh}
+.hero-in{padding:calc(62px + env(safe-area-inset-top,0px)) 0 64px;max-width:600px}
+.hero h1{font-size:clamp(26px,5vw,36px);margin-bottom:10px}
+.lead{font-size:15px;margin-bottom:16px}
+.hcta{flex-direction:row}
+.hero .btn{width:auto;min-height:44px;padding:10px 22px;font-size:15px}
+.wave{height:44px}
+section{padding:28px 0}
+.pcard{padding:64px 16px 16px}
+.back{top:10px;left:10px;width:42px;height:42px}
+.dots{top:14px;right:12px}
+#pnext{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:20;min-height:46px;box-shadow:0 10px 26px -6px rgba(0,0,0,.35)}
+.map{height:240px}
+}
 </style>
 </head>
 <body>
@@ -388,8 +468,8 @@ textarea{resize:vertical;max-width:100%}
 <div class="hbg"></div>
 <video id="hv" muted loop playsinline preload="auto" autoplay disablepictureinpicture aria-hidden="true"><source src="landing-page.mp4" type="video/mp4"></video>
 <div class="w"><div class="hero-in">
-<h1>Fahrzeugaufbereitung &amp; Detailing</h1>
-<p class="lead">Perfektion bis ins kleinste Detail – für maximalen Glanz, tiefenreine Sauberkeit und langfristigen Werterhalt Ihres Fahrzeugs.</p>
+<h1>Fahrzeug&shy;aufbereitung &amp; Detailing</h1>
+<p class="lead"><span class="dl">Perfektion bis ins kleinste Detail – für maximalen Glanz, tiefenreine Sauberkeit und langfristigen Werterhalt Ihres Fahrzeugs.</span><span class="ds">Perfektion im Detail – für Glanz, Sauberkeit und Werterhalt.</span></p>
 <div class="hcta"><a class="btn" href="#preise" data-pulse>Preis berechnen</a><a class="btn o" href="#leistungen">Leistungen ansehen</a></div>
 </div></div>
 <div class="wave" aria-hidden="true"><svg class="wv w1" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 62 C80 36,160 36,240 62 S400 88,480 62 C560 36,640 36,720 62 S880 88,960 62 C1040 36,1120 36,1200 62 S1360 88,1440 62 C1520 36,1600 36,1680 62 S1840 88,1920 62 C2000 36,2080 36,2160 62 S2320 88,2400 62 C2480 36,2560 36,2640 62 S2800 88,2880 62 L2880 120 L0 120Z"/></svg><svg class="wv w2" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 74 C120 52,240 52,360 74 S600 96,720 74 C840 52,960 52,1080 74 S1320 96,1440 74 C1560 52,1680 52,1800 74 S2040 96,2160 74 C2280 52,2400 52,2520 74 S2760 96,2880 74 L2880 120 L0 120Z"/></svg></div>
@@ -407,7 +487,7 @@ textarea{resize:vertical;max-width:100%}
 <div class="pstep" id="ps1" hidden><h3>Leistungen wählen</h3><div class="ctx"><span id="ctxv"></span><button type="button" class="lnk" data-go="0">Ändern</button></div><div id="pl"></div><button class="btn" id="pnext" type="button">Weiter</button></div>
 <div class="pstep" id="ps2" hidden><h3>Ihr Preis</h3><div class="sum"><div id="vh" style="font-weight:600"></div><div class="lnks"><button type="button" class="lnk" data-go="0">Fahrzeug ändern</button><button type="button" class="lnk" data-go="1">Leistungen ändern</button></div><ul id="sl"></ul><div class="tt" id="tt"></div><small id="tn"></small><a class="btn" id="wa" href="#" target="_blank" rel="noopener"><svg class="ico-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.25-1.48-1.39-1.73-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.18-.48-.3z"/></svg>Per WhatsApp anfragen</a><a class="btn o2" href="tel:+436805020884"><svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Jetzt anrufen</a><div class="or"><span>oder</span></div><a class="btn o3" href="#kontakt"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Kontaktformular nutzen</a></div></div>
 </div>
-<p class="note">Richtwert inkl. USt., unverbindlich. Der genaue Preis hängt vom Fahrzeugzustand ab und wird nach der Besichtigung genannt.</p>
+<p class="note"><span class="dl">Richtwert inkl. USt., unverbindlich. Der genaue Preis hängt vom Fahrzeugzustand ab und wird nach der Besichtigung genannt.</span><span class="ds">Richtwert inkl. USt., unverbindlich. Genauer Preis nach Besichtigung.</span></p>
 </section>
 
 <section id="kontakt"><h2>Kontakt</h2>
@@ -418,7 +498,7 @@ textarea{resize:vertical;max-width:100%}
 <div class="panel" id="p-wa" role="tabpanel"><form id="form"></form></div>
 <div class="panel" id="p-mail" role="tabpanel" hidden>
 <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
-<a class="call" style="font-size:clamp(18px,4.5vw,26px);word-break:break-all" href="mailto:gs.carcare10@gmail.com">gs.carcare10@gmail.com</a>
+<a class="call" style="font-size:clamp(17px,4.5vw,26px);overflow-wrap:anywhere" href="mailto:gs.carcare10@gmail.com">gs.carcare10@gmail.com</a>
 <a class="btn" id="mailbtn" href="mailto:gs.carcare10@gmail.com"><svg class="ico-mail" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>E-Mail schreiben</a></div>
 <div class="panel" id="p-tel" role="tabpanel" hidden>
 <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div>
@@ -428,7 +508,7 @@ textarea{resize:vertical;max-width:100%}
 <section id="standort"><h2>Standort</h2>
 <address>
 <div class="loc-head"><svg class="ico-pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg><b>Schmitzberg 5, 3312 Wallsee</b></div>
-<span class="term-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Nur nach Terminvereinbarung</span>
+<div class="term"><span class="term-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><div><b>Nur nach Terminvereinbarung</b><span class="t2">Bitte vorab per WhatsApp, E-Mail oder Telefon anfragen.</span></div></div>
 </address>
 <a class="btn" id="routebtn" href="https://www.google.com/maps/dir/?api=1&destination=Schmitzberg+5,+3312+Wallsee" target="_blank" rel="noopener"><svg class="ico-route" viewBox="0 0 24 24" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Route planen</a>
 <div class="mapw" id="mapw"><iframe class="map" title="Karte Schmitzberg 5, 3312 Wallsee" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Schmitzberg+5,+3312+Wallsee&z=14&output=embed"></iframe><button type="button" class="mapov" id="mapov" aria-label="Karte aktivieren"><span>Karte antippen zum Bedienen</span></button></div>
@@ -481,6 +561,21 @@ const PR={
   "Optische Umbauten":[null,null,null,null,null,null,null]
 };
 
+const SS=[
+  "Aussaugen, Kunststoffe, Scheiben, Sitze und Geruchsneutralisierung.",
+  "Vor- und Handwäsche, Felgen, Reifen, Trocknen und Scheiben außen.",
+  "Glanzauffrischung, feine Swirls und leichte Grauschleier.",
+  "Korrektur mittlerer Defekte und feiner Kratzer, Hochglanz.",
+  "Maximale Defektkorrektur inkl. Showroom-Finish.",
+  "Punktuelles Ausschleifen tieferer Kratzer (auf Anfrage).",
+  "Nass-Sprühextraktion für Teppiche, Matten und Sitze.",
+  "Porentiefe Reinigung, Versiegelung und Nährpflege.",
+  "Spezialentfernung von Tierhaaren aus Polstern, Teppich und Kofferraum.",
+  "Reinigung und Konservierung von Bauteilen und Kunststoffen.",
+  "Reinigung, Vorbereitung und hitzebeständige Lackierung.",
+  "Sportlenkrad, Wabengrill, Diffusor, Stoßstangen u. a."
+];
+const dsc=i=>'<span class="dl">'+SV[i][1]+'</span><span class="ds">'+SS[i]+'</span>';
 let size=null,step=0,tier=0,done=false,lastTT="";
 const POL=[SV[2][0],SV[3][0],SV[4][0]];
 const sel=new Set(),$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -536,13 +631,13 @@ const PIC=[
   "repeating-linear-gradient(60deg,rgba(255,255,255,.08) 0 4px,transparent 4px 14px),linear-gradient(135deg,#d35400,#2c3e50)"
 ];
 
-$("#ls").innerHTML=SV.map((s,i)=>`<article class="lr"><div class="lt"><span class="n">${String(i+1).padStart(2,"0")}</span><h3>${s[0]}</h3><p>${s[1]}</p><small>${FACTS[i]}</small></div><div class="pic" style="background:${PIC[i]}"></div></article>`).join("");
+$("#ls").innerHTML=SV.map((s,i)=>`<article class="lr"><div class="lt"><span class="n">${String(i+1).padStart(2,"0")}</span><h3>${s[0]}</h3><p>${dsc(i)}</p><small class="facts">${FACTS[i]}</small></div><div class="pic" style="background:${PIC[i]}"></div></article>`).join("");
 const WA_ICO='<svg class="ico-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.25-1.48-1.39-1.73-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.18-.48-.3z"/></svg>';
 $("#form").innerHTML=`<label class="flabel"><span class="flabel-t">Name <span class="req">*</span></span><input name="n" required autocomplete="name" placeholder="Vor- und Nachname"></label>
-<label class="flabel"><span class="flabel-t">Fahrzeug <span class="opt">Optional</span></span><input name="v" autocomplete="off" placeholder="Modell, Baujahr (z. B. VW Golf 8, 2021)"></label>
-<div class="cfg-hint" id="cfgh"><b>Wunschpaket vorab zusammenstellen?</b><p>Optional – Sie können Ihre Anfrage auch direkt ohne Preisberechnung absenden.</p><a class="btn o" href="#preise" data-pulse>Zum Preisrechner</a></div>
+<label class="flabel"><span class="flabel-t">Fahrzeug <span class="opt">(optional)</span></span><input name="v" autocomplete="off" placeholder="z. B. VW Golf 8, 2021"></label>
+<div class="cfg-hint" id="cfgh"><b>Wunschpaket vorab zusammenstellen?</b><p><span class="dl">Optional – Sie können Ihre Anfrage auch direkt ohne Preisberechnung absenden.</span><span class="ds">Anfrage auch ohne Preisberechnung möglich.</span></p><a class="btn o" href="#preise" data-pulse>Zum Preisrechner</a></div>
 <div class="lb" id="svwrap" hidden><span class="flabel-t">Ausgewählte Leistungen</span><small class="fi" id="fi"></small><div class="chips">${SV.map((s,i)=>`<label><input type="checkbox" data-i="${i}"><span>${s[0]}</span></label>`).join("")}</div><a class="lnk" href="#preise" data-pulse>Im Preisrechner ändern</a></div>
-<label class="flabel"><span class="flabel-t">Ihre Nachricht <span class="opt">Optional</span></span><textarea name="m" rows="3" placeholder="Wunschtermin, Zustand des Fahrzeugs oder spezielle Fragen..."></textarea></label>
+<label class="flabel"><span class="flabel-t">Ihre Nachricht <span class="opt">(optional)</span></span><textarea name="m" rows="3" placeholder="Wunschtermin oder Fragen …"></textarea></label>
 <button class="btn" type="submit">${WA_ICO}Per WhatsApp senden</button>`;
 
 let atForm=false;
@@ -550,7 +645,7 @@ function sync(){
   SV.forEach((s,i)=>{const inp=$(`.chips input[data-i="${i}"]`);if(inp)inp.checked=sel.has(s[0])});
   const n=sel.size;
   renderPrice();
-  $("#fi").textContent=(size!==null?SIZES[size][0]+" · ":"")+(n?n+" gewählt":"keine Leistung gewählt")+(lastTT?" · Richtwert "+lastTT:"")+" · Mehrfachauswahl möglich";
+  $("#fi").innerHTML=(size!==null?SIZES[size][0]+" · ":"")+(n?n+" gewählt":"keine Leistung gewählt")+(lastTT?" · Richtwert "+lastTT:"")+'<span class="dl"> · Mehrfachauswahl möglich</span>';
   const mb=["Guten Tag Herr Sarcevic,","","ich interessiere mich für folgende Leistung(en): "+(list().map(lbl).join(", ")||"–")];
   if(size!==null)mb.push("Fahrzeugklasse: "+SIZES[size][0]);
   mb.push("Wunschtermin: ","","Mit freundlichen Grüßen");
@@ -590,7 +685,7 @@ const GR=[["Aufbereitung",[0,1]],["Lackpflege",["pol",5]],["Extras & Umbauten",[
 let di=0;
 const cardHTML=k=>{
   const pol=k==="pol",x=pol?SV[2]:SV[k],d=di++;
-  return `<div class="card" data-k="${k}" style="--d:${d}">${ICON}<button type="button" class="ct" aria-pressed="false"><b>${pol?"Lackpolitur":x[0]}</b><span class="cd">${x[1]}</span></button>`
+  return `<div class="card" data-k="${k}" style="--d:${d}">${ICON}<button type="button" class="ct" aria-pressed="false"><b>${pol?"Lackpolitur":x[0]}</b><span class="cd">${dsc(pol?2:k)}</span></button>`
   +(pol?`<div class="tiers" role="group" aria-label="Politurstufe">${[0,1,2].map(t=>`<button type="button" data-t="${t}" aria-pressed="false">Stufe ${t+1}<small></small></button>`).join("")}</div>`:"")
   +`<div class="c-price"></div><div class="pick"><i class="tick"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></i><em style="font-style:normal">Auswählen</em></div></div>`;
 };
@@ -623,7 +718,7 @@ function renderPrice(){
     c.querySelector("em").textContent=on?"Ausgewählt":"Auswählen";
     c.querySelector(".c-price").textContent=getPriceStr(nm,size);
     if(pol){
-      c.querySelector(".cd").textContent=SV[2+tier][1];
+      c.querySelector(".cd").innerHTML=dsc(2+tier);
       c.querySelectorAll(".tiers button").forEach((b,t)=>{b.setAttribute("aria-pressed",t===tier);b.querySelector("small").textContent=tierPrice(t)});
     }
   });
@@ -656,7 +751,7 @@ function go(n){
   if(n===2&&!done){done=true;showCfg()}
   step=n;[0,1,2].forEach(i=>$("#ps"+i).hidden=i!==n);$("#back").hidden=n===0;upDots();
   if(n===0)capSet();
-  if(innerWidth<=900){const pc=$(".pcard"),r=pc.getBoundingClientRect();if(r.top<60||r.top>innerHeight*.4)pc.scrollIntoView({behavior:"smooth",block:"start"})}
+  if(innerWidth<=900||innerHeight<=520){const pc=$(".pcard"),r=pc.getBoundingClientRect();if(r.top<60||r.top>innerHeight*.4)pc.scrollIntoView({behavior:"smooth",block:"start"})}
 }
 $("#back").onclick=()=>go(step-1);
 $("#pnext").onclick=()=>{if(sel.size)go(2)};

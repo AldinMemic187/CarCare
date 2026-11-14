@@ -313,6 +313,26 @@ header.sc{transform:none;visibility:visible;transition-delay:0s}
 .tile b{font-size:16px;line-height:1.25;align-self:end}
 .tile small{font-size:13px;line-height:1.35;align-self:start}
 }
+
+/* ---- Buttons, Tags, Icons v5 ---- */
+.card .c-price{justify-self:start}
+.btn svg{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;margin-right:9px;vertical-align:-4px}
+.ico-wa{animation:popi 3.2s ease-in-out infinite;transform-origin:50% 50%}
+.ico-tel{animation:ring 3.6s ease-in-out infinite;transform-origin:50% 60%}
+.btn:hover .ico-wa,.btn:hover .ico-tel{animation-duration:1.4s}
+@keyframes popi{0%,68%,100%{transform:scale(1)}78%{transform:scale(1.22) rotate(-6deg)}88%{transform:scale(.95)}94%{transform:scale(1.06)}}
+@keyframes ring{0%,58%,100%{transform:rotate(0)}6%{transform:rotate(-18deg)}12%{transform:rotate(16deg)}18%{transform:rotate(-14deg)}24%{transform:rotate(12deg)}30%{transform:rotate(-8deg)}36%{transform:rotate(5deg)}42%{transform:rotate(0)}}
+.sum .lnks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px}
+.sum .lnks .lnk{display:flex;align-items:center;justify-content:center;min-height:48px;padding:8px 10px;border:1px solid color-mix(in srgb,var(--onacc) 38%,transparent);border-radius:12px;background:color-mix(in srgb,var(--onacc) 8%,transparent);color:inherit;opacity:1;font-size:14px;font-weight:600;line-height:1.2;text-align:center;text-decoration:none;white-space:normal;transition:background .2s,transform .15s}
+.sum .lnks .lnk:active{transform:scale(.97);background:color-mix(in srgb,var(--onacc) 20%,transparent)}
+.or{display:flex;align-items:center;gap:12px;margin:18px 0 12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.65}
+.or::before,.or::after{content:"";flex:1;height:1px;background:currentColor;opacity:.45}
+.sum .btn.o3{background:color-mix(in srgb,var(--onacc) 14%,transparent);color:inherit;border:0}
+.sum .btn:active{transform:scale(.98)}
+.ctx .lnk{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--fg);font-size:13px;font-weight:600;text-decoration:none}
+.ctx .lnk:active{transform:scale(.96)}
+#svwrap .lnk{justify-self:center;display:inline-flex;align-items:center;min-height:44px;padding:0 18px;margin-top:6px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--fg);font-size:14px;font-weight:600;text-decoration:none}
+@media(prefers-reduced-motion:reduce){.ico-wa,.ico-tel{animation:none!important}}
 textarea{resize:vertical;max-width:100%}
 .ic{width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;margin:0 auto 14px}
 .ic svg,.tabs svg{stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -355,7 +375,7 @@ textarea{resize:vertical;max-width:100%}
 <div class="dots"><button type="button" class="on" aria-label="Schritt 1: Fahrzeug">1</button><button type="button" aria-label="Schritt 2: Leistungen">2</button><button type="button" aria-label="Schritt 3: Preis">3</button></div>
 <div class="pstep" id="ps0"><h3>Fahrzeugkategorie</h3><div class="sz" id="sz"></div><p class="szcap" id="szcap" aria-live="polite"></p></div>
 <div class="pstep" id="ps1" hidden><h3>Leistungen wählen</h3><div class="ctx"><span id="ctxv"></span><button type="button" class="lnk" data-go="0">Ändern</button></div><div id="pl"></div><button class="btn" id="pnext" type="button">Weiter</button></div>
-<div class="pstep" id="ps2" hidden><h3>Ihr Preis</h3><div class="sum"><div id="vh" style="font-weight:600"></div><div class="lnks"><button type="button" class="lnk" data-go="0">Fahrzeug ändern</button><button type="button" class="lnk" data-go="1">Leistungen ändern</button></div><ul id="sl"></ul><div class="tt" id="tt"></div><small id="tn"></small><a class="btn" id="wa" href="#" target="_blank" rel="noopener">Per WhatsApp anfragen</a><a class="btn o2" href="tel:+436805020884">Jetzt anrufen</a><a class="lnk" href="#kontakt">Lieber das Kontaktformular nutzen</a></div></div>
+<div class="pstep" id="ps2" hidden><h3>Ihr Preis</h3><div class="sum"><div id="vh" style="font-weight:600"></div><div class="lnks"><button type="button" class="lnk" data-go="0">Fahrzeug ändern</button><button type="button" class="lnk" data-go="1">Leistungen ändern</button></div><ul id="sl"></ul><div class="tt" id="tt"></div><small id="tn"></small><a class="btn" id="wa" href="#" target="_blank" rel="noopener"><svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/><path d="M9.3 8.7c-.3.4-.3 1.1.3 2.1.8 1.3 1.9 2.4 3.2 3.1 1 .5 1.5.3 1.8 0l.5-.6a.5.5 0 0 0 0-.7l-1.1-.8a.5.5 0 0 0-.6 0l-.5.4a3.8 3.8 0 0 1-1.5-1.5l.4-.5a.5.5 0 0 0 0-.6l-.8-1.1a.5.5 0 0 0-.7 0z"/></svg>Per WhatsApp anfragen</a><a class="btn o2" href="tel:+436805020884"><svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Jetzt anrufen</a><div class="or"><span>oder</span></div><a class="btn o3" href="#kontakt"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Kontaktformular nutzen</a></div></div>
 </div>
 <p class="note">Richtwert inkl. USt., unverbindlich. Der genaue Preis hängt vom Fahrzeugzustand ab und wird nach der Besichtigung genannt.</p>
 </section>
@@ -372,7 +392,7 @@ textarea{resize:vertical;max-width:100%}
 <a class="btn" id="mailbtn" href="mailto:gs.carcare10@gmail.com">E-Mail schreiben</a></div>
 <div class="panel" id="p-tel" role="tabpanel" hidden>
 <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div>
-<a class="call" href="tel:+436805020884">0680 502 08 84</a><a class="btn" href="tel:+436805020884">Jetzt anrufen</a></div>
+<a class="call" href="tel:+436805020884">0680 502 08 84</a><a class="btn" href="tel:+436805020884"><svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Jetzt anrufen</a></div>
 </section>
 
 <section id="standort"><h2>Standort</h2>
@@ -485,11 +505,11 @@ const PIC=[
 
 $("#ls").innerHTML=SV.map((s,i)=>`<article class="lr"><div class="lt"><span class="n">${String(i+1).padStart(2,"0")}</span><h3>${s[0]}</h3><p>${s[1]}</p><small>${FACTS[i]}</small></div><div class="pic" style="background:${PIC[i]}"></div></article>`).join("");
 $("#form").innerHTML=`<label>Name<input name="n" required autocomplete="name"></label>
-<label>Fahrzeug (Modell, Baujahr)<input name="v" required></label>
-<div class="cfg-hint" id="cfgh"><b>Erst Preis konfigurieren</b><p>Wählen Sie im Preisrechner Ihre Fahrzeugklasse und Leistungen – danach erscheinen sie hier automatisch.</p><a class="btn o" href="#preise" data-pulse>Preis konfigurieren</a></div>
+<label>Fahrzeug (Modell, Baujahr) – optional<input name="v" autocomplete="off"></label>
+<div class="cfg-hint" id="cfgh"><b>Preis vorab berechnen</b><p>Optional – Sie können auch direkt eine Nachricht senden.</p><a class="btn o" href="#preise" data-pulse>Zum Preisrechner</a></div>
 <div class="lb" id="svwrap" hidden>Ihre Auswahl<small class="fi" id="fi"></small><div class="chips">${SV.map((s,i)=>`<label><input type="checkbox" data-i="${i}"><span>${s[0]}</span></label>`).join("")}</div><a class="lnk" href="#preise" data-pulse>Im Preisrechner ändern</a></div>
 <label>Nachricht<textarea name="m" rows="3" placeholder="Wunschtermin, Zustand, Fragen"></textarea></label>
-<button class="btn" type="submit">Per WhatsApp senden</button>`;
+<button class="btn" type="submit"><svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/><path d="M9.3 8.7c-.3.4-.3 1.1.3 2.1.8 1.3 1.9 2.4 3.2 3.1 1 .5 1.5.3 1.8 0l.5-.6a.5.5 0 0 0 0-.7l-1.1-.8a.5.5 0 0 0-.6 0l-.5.4a3.8 3.8 0 0 1-1.5-1.5l.4-.5a.5.5 0 0 0 0-.6l-.8-1.1a.5.5 0 0 0-.7 0z"/></svg>Per WhatsApp senden</button>`;
 
 let atForm=false;
 function sync(){
@@ -497,8 +517,10 @@ function sync(){
   const n=sel.size;
   renderPrice();
   $("#fi").textContent=(size!==null?SIZES[size][0]+" · ":"")+(n?n+" gewählt":"keine Leistung gewählt")+(lastTT?" · Richtwert "+lastTT:"")+" · Mehrfachauswahl möglich";
-  const vhName=size!==null?SIZES[size][0]:"Noch nicht gewählt";
-  $("#mailbtn").href=`mailto:${MAIL}?subject=${encodeURIComponent("Anfrage GS CarCare Fahrzeugaufbereitung")}&body=${encodeURIComponent("Guten Tag Herr Sarcevic,\n\nich interessiere mich für folgende Leistung(en): "+(list().join(", ")||"–")+"\nFahrzeugkategorie: "+vhName+"\nFahrzeug (Modell, Baujahr): \nWunschtermin: \n\nMit freundlichen Grüßen")}`;
+  const mb=["Guten Tag Herr Sarcevic,","","ich interessiere mich für folgende Leistung(en): "+(list().map(lbl).join(", ")||"–")];
+  if(size!==null)mb.push("Fahrzeugklasse: "+SIZES[size][0]);
+  mb.push("Wunschtermin: ","","Mit freundlichen Grüßen");
+  $("#mailbtn").href=`mailto:${MAIL}?subject=${encodeURIComponent("Anfrage GS CarCare Fahrzeugaufbereitung")}&body=${encodeURIComponent(mb.join("\n"))}`;
 }
 const toggle=i=>{const n=SV[i][0];
   if(sel.has(n))sel.delete(n);else{if(POL.includes(n))POL.forEach(p=>sel.delete(p));sel.add(n)}
@@ -509,8 +531,12 @@ $$(".chips input").forEach(c=>c.onchange=()=>toggle(+c.dataset.i));
 new IntersectionObserver(e=>{atForm=e[0].isIntersecting;sync()},{threshold:.15}).observe($("#kontakt"));
 $("#form").addEventListener("submit",e=>{e.preventDefault();
   const d=Object.fromEntries(new FormData(e.target));
-  const vhName=size!==null?SIZES[size][0]:"Nicht angegeben";
-  const txt=`Anfrage GS CarCare\nName: ${d.n}\nFahrzeug: ${d.v}\nKategorie: ${vhName}\nLeistungen: ${list().join(", ")||"noch offen"}\nNachricht: ${d.m||"–"}`;
+  const L=["Anfrage GS CarCare","Name: "+d.n];
+  if((d.v||"").trim())L.push("Fahrzeug: "+d.v.trim());
+  if(size!==null)L.push("Fahrzeugklasse: "+SIZES[size][0]);
+  if(sel.size)L.push("Leistungen: "+list().map(lbl).join(", "));
+  if((d.m||"").trim())L.push("Nachricht: "+d.m.trim());
+  const txt=L.join("\n");
   window.open(`https://wa.me/${WA}?text=${encodeURIComponent(txt)}`,"_blank","noopener");
 });
 
@@ -581,7 +607,7 @@ function renderPrice(){
   $("#vh").textContent=SIZES[size][0]+" ("+SIZES[size][1]+")";
   $("#ctxv").textContent=SIZES[size][0];
   const tt=tot>0?"ab "+fmt(tot)+" €"+(ask?" (+ Leistungen auf Anfrage)":""):"auf Anfrage";
-  $("#wa").href=`https://wa.me/${WA}?text=`+encodeURIComponent(L.length?`Anfrage GS CarCare\nKategorie: ${SIZES[size][0]}\nLeistungen: ${L.map(lbl).join(", ")}\nRichtwert: ${tt}\nFahrzeug (Modell, Baujahr): `:"Anfrage GS CarCare");
+  $("#wa").href=`https://wa.me/${WA}?text=`+encodeURIComponent(L.length?`Anfrage GS CarCare\nKategorie: ${SIZES[size][0]}\nLeistungen: ${L.map(lbl).join(", ")}\nRichtwert: ${tt}`:"Anfrage GS CarCare");
   capSet();
   $("#sl").innerHTML=rows.length?rows.join(""):'<li class="e">Noch keine Leistung gewählt</li>';
   if(tot>0)count(tot);else{shown=0;$("#tt").textContent=L.length?"auf Anfrage":"–"}

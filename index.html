@@ -264,9 +264,9 @@ header:not(.sc) .hb{background:#fff;color:#111}
 .hbg{position:absolute;inset:0;z-index:-3;background:radial-gradient(60% 80% at 78% 18%,rgba(110,150,215,.38),transparent 62%),radial-gradient(50% 60% at 12% 88%,rgba(255,255,255,.09),transparent 60%),linear-gradient(135deg,#171a20,#08090b);overflow:hidden}
 .hbg::after{content:"";position:absolute;inset:-20% -50%;background:linear-gradient(100deg,transparent 42%,rgba(255,255,255,.1) 50%,transparent 58%);transform:translate3d(-60%,0,0);animation:sweep 9s ease-in-out infinite;will-change:transform}
 @keyframes sweep{to{transform:translate3d(60%,0,0)}}
-.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0;transition:opacity 1.2s}
-.hero video.rdy{opacity:1}
-.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.28) 45%,rgba(0,0,0,.62))}
+.hero video{position:absolute;inset:-24px;width:calc(100% + 48px);height:calc(100% + 48px);object-fit:cover;z-index:-2;opacity:0;filter:blur(7px);transform:translate3d(0,0,0);transition:opacity 1.2s ease;pointer-events:none}
+.hero video.rdy{opacity:.85}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,12,16,.65) 0%,rgba(10,12,16,.4) 40%,rgba(10,12,16,.78) 100%);pointer-events:none}
 .hero .w{width:100%}
 .hero-in{padding:calc(96px + env(safe-area-inset-top,0px)) 0 clamp(110px,16vw,190px);max-width:640px}
 .hero-in>*{animation:rise .8s cubic-bezier(.16,1,.3,1) both}
@@ -354,7 +354,7 @@ textarea{resize:vertical;max-width:100%}
 <div id="sent" aria-hidden="true"></div>
 <div class="hero" id="top">
 <div class="hbg"></div>
-<video id="hv" muted loop playsinline preload="none" disablepictureinpicture aria-hidden="true"></video>
+<video id="hv" muted loop playsinline preload="auto" autoplay disablepictureinpicture aria-hidden="true"><source src="landing-page.mp4" type="video/mp4"></video>
 <div class="w"><div class="hero-in">
 <span class="eyebrow">GS CarCare</span>
 <h1>Fahrzeugaufbereitung &amp; Detailing</h1>
@@ -631,19 +631,21 @@ $$("[data-go]").forEach(b=>b.onclick=()=>go(+b.dataset.go));
 /* Header, Hero, Video */
 const hd=document.querySelector("header"),hero=$(".hero"),hv=$("#hv");
 new IntersectionObserver(([e])=>hd.classList.toggle("sc",!e.isIntersecting&&e.boundingClientRect.top<0)).observe($("#sent"));
-const mqD=matchMedia("(min-width:901px)"),mqR=matchMedia("(prefers-reduced-motion:reduce)");
-function startVideo(){
-  if(hv.dataset.on||!mqD.matches||mqR.matches||(navigator.connection&&navigator.connection.saveData))return;
-  hv.dataset.on=1;hv.muted=true;
-  hv.innerHTML='<source src="hero.webm" type="video/webm"><source src="hero.mp4" type="video/mp4">';
-  hv.querySelector("source:last-child").addEventListener("error",()=>{hv.remove()});
-  hv.addEventListener("canplay",()=>hv.classList.add("rdy"),{once:true});
-  hv.load();const pr=hv.play();if(pr&&pr.catch)pr.catch(()=>{});
+const mqR=matchMedia("(prefers-reduced-motion:reduce)");
+function initHeroVideo(){
+  if(!hv)return;
+  if(mqR.matches||(navigator.connection&&navigator.connection.saveData)){hv.remove();return}
+  hv.muted=true;
+  const onReady=()=>hv.classList.add("rdy");
+  hv.addEventListener("playing",onReady,{once:true});
+  hv.addEventListener("canplay",onReady,{once:true});
+  if(hv.readyState>=2)onReady();
+  const pr=hv.play();if(pr&&pr.catch)pr.catch(()=>{});
 }
-startVideo();mqD.addEventListener("change",startVideo);
+initHeroVideo();
 new IntersectionObserver(([e])=>{
   hero.classList.toggle("off",!e.isIntersecting);
-  if(hv.dataset.on&&hv.isConnected){if(e.isIntersecting){const pr=hv.play();if(pr&&pr.catch)pr.catch(()=>{})}else hv.pause()}
+  if(hv&&hv.isConnected){if(e.isIntersecting){const pr=hv.play();if(pr&&pr.catch)pr.catch(()=>{})}else hv.pause()}
 }).observe(hero);
 document.addEventListener("click",e=>{
   const a=e.target.closest("[data-pulse],a[href=\"#preise\"]");if(!a)return;

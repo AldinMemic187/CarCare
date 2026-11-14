@@ -69,7 +69,9 @@ input:focus,textarea:focus{outline:2px solid var(--fg);outline-offset:1px}
 .chips span{display:block;padding:8px 13px;border:1px solid var(--line);border-radius:99px;font-size:14px;background:var(--card)}
 .chips input:checked+span{background:var(--acc);color:var(--onacc);border-color:var(--acc)}
 .chips input:focus-visible+span{outline:2px solid var(--fg);outline-offset:2px}
-.btn{display:inline-block;padding:13px 22px;border:0;border-radius:8px;background:var(--acc);color:var(--onacc);font:inherit;font-weight:600;text-decoration:none;cursor:pointer;text-align:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 22px;border:0;border-radius:10px;background:var(--acc);color:var(--onacc);font:inherit;font-weight:600;text-decoration:none;cursor:pointer;text-align:center;transition:transform .18s cubic-bezier(.16,1,.3,1),box-shadow .18s ease,background .2s,color .2s,border-color .2s;will-change:transform}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px -4px rgba(0,0,0,.28)}
+.btn:active{transform:translateY(1px) scale(.98);box-shadow:0 2px 6px -2px rgba(0,0,0,.2)}
 .call{font-size:clamp(28px,6vw,38px);font-weight:700;display:block;margin:4px 0 16px;text-decoration:none}
 #bar{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,160%);z-index:35;display:flex;align-items:center;gap:16px;padding:10px 10px 10px 20px;border-radius:99px;background:var(--acc);color:var(--onacc);font-size:15px;white-space:nowrap;box-shadow:0 8px 30px rgba(0,0,0,.3);transition:transform .3s}
 #bar.on{transform:translate(-50%,0)}
@@ -161,8 +163,10 @@ footer a, footer button{margin:0 18px 0 0}
 .dots button:disabled{cursor:default;opacity:.45}
 .dots button:not(:disabled):hover{border-color:var(--fg)}
 .dots button.on{background:var(--acc)}
-.szcap{margin:16px 0 0;min-height:1.6em;text-align:center;color:var(--mut);font-size:14px}
-@media(max-width:900px){.szcap{display:none}}
+.pstep-hdr{margin:0 0 16px}
+.pstep-hdr h3{margin:0 0 6px}
+.szcap{margin:0;min-height:1.5em;color:var(--mut);font-size:14.5px;line-height:1.45}
+.szcap strong{color:var(--fg);font-weight:600}
 @media(min-width:901px){
 .sz{grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
 .tile{align-items:center;text-align:center;gap:2px;padding:14px 4px 12px}
@@ -254,9 +258,20 @@ footer .w{gap:2px}
 header{position:fixed;top:0;left:0;right:0;padding-top:env(safe-area-inset-top,0px);background:transparent;border-bottom:1px solid transparent;color:#fff;transition:background .3s,border-color .3s,color .3s,transform .35s cubic-bezier(.16,1,.3,1)}
 header.sc{background:var(--bg);border-bottom-color:var(--line);color:var(--fg)}
 header:not(.sc) .logo img{filter:none}
-header:not(.sc) nav a{color:rgba(255,255,255,.8)}header:not(.sc) nav a:hover{color:#fff}
+header nav{display:flex;align-items:center;gap:6px}
+header nav a{position:relative;padding:8px 14px;border-radius:8px;font-weight:500;color:rgba(255,255,255,.8);text-decoration:none;transition:color .25s ease,background .25s ease}
+header nav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+header.sc nav a{color:var(--mut)}
+header.sc nav a:hover{color:var(--fg);background:color-mix(in srgb,var(--fg) 6%,transparent)}
+header nav a::after{content:"";position:absolute;bottom:0;left:14px;right:14px;height:2.5px;border-radius:2px;background:#fff;transform:scaleX(0);transform-origin:center;transition:transform .3s cubic-bezier(.16,1,.3,1),background .3s,opacity .3s;opacity:0}
+header.sc nav a::after{background:var(--fg)}
+header nav a.act{color:#fff;font-weight:600}
+header.sc nav a.act{color:var(--fg)}
+header nav a.act::after{transform:scaleX(1);opacity:1}
 header:not(.sc) .hb{background:#fff;color:#111}
-.hb{display:inline-flex;align-items:center}
+.hb{display:inline-flex;align-items:center;transition:transform .18s,box-shadow .18s,background .2s}
+.hb:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.hb:active{transform:translateY(1px) scale(.97)}
 #sent{position:absolute;top:80px;left:0;width:1px;height:1px;pointer-events:none}
 #leistungen{border-top:0;padding-top:28px;content-visibility:auto;contain-intrinsic-size:auto 900px}
 #standort{content-visibility:auto;contain-intrinsic-size:auto 700px}
@@ -278,8 +293,11 @@ header:not(.sc) .hb{background:#fff;color:#111}
 .hmeta{font-size:14px;margin:0 0 28px;opacity:.75}
 .hmeta a{text-decoration:underline;text-underline-offset:3px}
 .hcta{display:flex;flex-wrap:wrap;gap:12px}
-.hero .btn{background:#fff;color:#111;padding:14px 26px}
-.hero .btn.o{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.5)}
+.hero .btn{background:#fff;color:#111;padding:14px 28px;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.3);transition:transform .18s cubic-bezier(.16,1,.3,1),box-shadow .18s ease,background .2s,color .2s}
+.hero .btn:hover{background:#fff;transform:translateY(-2px);box-shadow:0 10px 30px -4px rgba(255,255,255,.35)}
+.hero .btn:active{transform:translateY(1px) scale(.98);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.hero .btn.o{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hero .btn.o:hover{background:rgba(255,255,255,.2);border-color:#fff;box-shadow:0 8px 26px -4px rgba(255,255,255,.22)}
 .wave{position:absolute;left:0;right:0;bottom:-1px;height:clamp(56px,9vw,130px);overflow:hidden;pointer-events:none}
 .wv{position:absolute;left:0;bottom:0;width:200%;height:100%;fill:var(--bg);will-change:transform;animation:wave 16s linear infinite}
 .w1{opacity:.4;animation-duration:28s;animation-direction:reverse}
@@ -316,12 +334,17 @@ header.sc{transform:none;visibility:visible;transition-delay:0s}
 
 /* ---- Buttons, Tags, Icons v5 ---- */
 .card .c-price{justify-self:start}
-.btn svg{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;margin-right:9px;vertical-align:-4px}
+.btn svg{width:20px;height:20px;flex:none;margin-right:9px;vertical-align:-4px}
+.btn svg:not(.ico-wa){stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.btn svg.ico-wa{fill:currentColor;stroke:none}
+.tabs svg.ico-wa{fill:currentColor;stroke:none}
 .ico-wa{animation:popi 3.2s ease-in-out infinite;transform-origin:50% 50%}
 .ico-tel{animation:ring 3.6s ease-in-out infinite;transform-origin:50% 60%}
-.btn:hover .ico-wa,.btn:hover .ico-tel{animation-duration:1.4s}
+.ico-mail{animation:float-mail 3.4s ease-in-out infinite;transform-origin:50% 50%}
+.btn:hover .ico-wa,.btn:hover .ico-tel,.btn:hover .ico-mail,.tabs button:hover .ico-wa{animation-duration:1.2s}
 @keyframes popi{0%,68%,100%{transform:scale(1)}78%{transform:scale(1.22) rotate(-6deg)}88%{transform:scale(.95)}94%{transform:scale(1.06)}}
 @keyframes ring{0%,58%,100%{transform:rotate(0)}6%{transform:rotate(-18deg)}12%{transform:rotate(16deg)}18%{transform:rotate(-14deg)}24%{transform:rotate(12deg)}30%{transform:rotate(-8deg)}36%{transform:rotate(5deg)}42%{transform:rotate(0)}}
+@keyframes float-mail{0%,65%,100%{transform:translateY(0) scale(1)}72%{transform:translateY(-3px) scale(1.15)}80%{transform:translateY(1px) scale(.95)}88%{transform:translateY(-1px) scale(1.05)}}
 .sum .lnks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px}
 .sum .lnks .lnk{display:flex;align-items:center;justify-content:center;min-height:48px;padding:8px 10px;border:1px solid color-mix(in srgb,var(--onacc) 38%,transparent);border-radius:12px;background:color-mix(in srgb,var(--onacc) 8%,transparent);color:inherit;opacity:1;font-size:14px;font-weight:600;line-height:1.2;text-align:center;text-decoration:none;white-space:normal;transition:background .2s,transform .15s}
 .sum .lnks .lnk:active{transform:scale(.97);background:color-mix(in srgb,var(--onacc) 20%,transparent)}
@@ -332,17 +355,26 @@ header.sc{transform:none;visibility:visible;transition-delay:0s}
 .ctx .lnk{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--fg);font-size:13px;font-weight:600;text-decoration:none}
 .ctx .lnk:active{transform:scale(.96)}
 #svwrap .lnk{justify-self:center;display:inline-flex;align-items:center;min-height:44px;padding:0 18px;margin-top:6px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--fg);font-size:14px;font-weight:600;text-decoration:none}
-@media(prefers-reduced-motion:reduce){.ico-wa,.ico-tel{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.ico-wa,.ico-tel,.ico-mail{animation:none!important}}
 textarea{resize:vertical;max-width:100%}
 .ic{width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;margin:0 auto 14px}
 .ic svg,.tabs svg{stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ic svg{width:24px;height:24px}
 .tabs svg{width:16px;height:16px;vertical-align:-3px;margin-right:7px}
 @media(max-width:640px){.tabs svg{display:none}}
+.flabel{display:grid;gap:6px;font-size:14px;color:var(--fg);text-align:left}
+.flabel-t{display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:14px;color:var(--fg)}
+.flabel .req{color:#e74c3c;margin-left:2px}
+.flabel .opt{font-size:12px;font-weight:500;color:var(--mut);background:color-mix(in srgb,var(--fg) 7%,transparent);padding:2px 8px;border-radius:99px}
+#kontakt input:not([type=checkbox]),#kontakt textarea{text-align:left;font-size:15px;line-height:1.4}
+#kontakt input:not([type=checkbox])::placeholder,#kontakt textarea::placeholder{color:var(--mut);opacity:.7}
 #standort{text-align:center}
-#standort address{font-style:normal;margin-bottom:18px}
-#standort address b{display:block;font-size:18px}
-#standort address span{color:var(--mut);font-size:15px}
+#standort address{font-style:normal;margin-bottom:20px}
+.loc-head{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px}
+.loc-head b{font-size:20px;letter-spacing:-.01em}
+.ico-pin{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--acc)}
+.term-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 16px;border-radius:99px;background:color-mix(in srgb,var(--fg) 7%,transparent);color:var(--mut);font-size:14.5px;font-weight:500}
+.term-badge svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .map{width:100%;height:380px;border:1px solid var(--line);border-radius:16px;background:var(--card);margin-top:22px;display:block}
 @media(max-width:640px){.map{height:300px;border-radius:14px}}
 </style>
@@ -356,10 +388,8 @@ textarea{resize:vertical;max-width:100%}
 <div class="hbg"></div>
 <video id="hv" muted loop playsinline preload="auto" autoplay disablepictureinpicture aria-hidden="true"><source src="landing-page.mp4" type="video/mp4"></video>
 <div class="w"><div class="hero-in">
-<span class="eyebrow">GS CarCare</span>
-<h1>Fahrzeugaufbereitung &amp; Detailing</h1>
-<p class="lead">Sauber ist Standard – Detail ist Leidenschaft!</p>
-<p class="hmeta">Schmitzberg 5, 3312 Wallsee · <a href="tel:+436805020884">0680 502 08 84</a> · nur nach Terminvereinbarung</p>
+<h1>Professionelle Fahrzeug­aufbereitung &amp; Detailing</h1>
+<p class="lead">Perfektion bis ins kleinste Detail – für maximalen Glanz, tiefenreine Sauberkeit und langfristigen Werterhalt Ihres Fahrzeugs.</p>
 <div class="hcta"><a class="btn" href="#preise" data-pulse>Preis berechnen</a><a class="btn o" href="#leistungen">Leistungen ansehen</a></div>
 </div></div>
 <div class="wave" aria-hidden="true"><svg class="wv w1" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 62 C80 36,160 36,240 62 S400 88,480 62 C560 36,640 36,720 62 S880 88,960 62 C1040 36,1120 36,1200 62 S1360 88,1440 62 C1520 36,1600 36,1680 62 S1840 88,1920 62 C2000 36,2080 36,2160 62 S2320 88,2400 62 C2480 36,2560 36,2640 62 S2800 88,2880 62 L2880 120 L0 120Z"/></svg><svg class="wv w2" viewBox="0 0 2880 120" preserveAspectRatio="none"><path d="M0 74 C120 52,240 52,360 74 S600 96,720 74 C840 52,960 52,1080 74 S1320 96,1440 74 C1560 52,1680 52,1800 74 S2040 96,2160 74 C2280 52,2400 52,2520 74 S2760 96,2880 74 L2880 120 L0 120Z"/></svg></div>
@@ -373,36 +403,39 @@ textarea{resize:vertical;max-width:100%}
 <div class="pcard">
 <button class="back" id="back" type="button" aria-label="Zurück" hidden><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
 <div class="dots"><button type="button" class="on" aria-label="Schritt 1: Fahrzeug">1</button><button type="button" aria-label="Schritt 2: Leistungen">2</button><button type="button" aria-label="Schritt 3: Preis">3</button></div>
-<div class="pstep" id="ps0"><h3>Fahrzeugkategorie</h3><div class="sz" id="sz"></div><p class="szcap" id="szcap" aria-live="polite"></p></div>
+<div class="pstep" id="ps0"><div class="pstep-hdr"><h3>Fahrzeugkategorie wählen</h3><p class="szcap" id="szcap" aria-live="polite">Wählen Sie Ihre Fahrzeugklasse – passende Beispielmodelle erscheinen beim Auswählen.</p></div><div class="sz" id="sz"></div></div>
 <div class="pstep" id="ps1" hidden><h3>Leistungen wählen</h3><div class="ctx"><span id="ctxv"></span><button type="button" class="lnk" data-go="0">Ändern</button></div><div id="pl"></div><button class="btn" id="pnext" type="button">Weiter</button></div>
-<div class="pstep" id="ps2" hidden><h3>Ihr Preis</h3><div class="sum"><div id="vh" style="font-weight:600"></div><div class="lnks"><button type="button" class="lnk" data-go="0">Fahrzeug ändern</button><button type="button" class="lnk" data-go="1">Leistungen ändern</button></div><ul id="sl"></ul><div class="tt" id="tt"></div><small id="tn"></small><a class="btn" id="wa" href="#" target="_blank" rel="noopener"><svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/><path d="M9.3 8.7c-.3.4-.3 1.1.3 2.1.8 1.3 1.9 2.4 3.2 3.1 1 .5 1.5.3 1.8 0l.5-.6a.5.5 0 0 0 0-.7l-1.1-.8a.5.5 0 0 0-.6 0l-.5.4a3.8 3.8 0 0 1-1.5-1.5l.4-.5a.5.5 0 0 0 0-.6l-.8-1.1a.5.5 0 0 0-.7 0z"/></svg>Per WhatsApp anfragen</a><a class="btn o2" href="tel:+436805020884"><svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Jetzt anrufen</a><div class="or"><span>oder</span></div><a class="btn o3" href="#kontakt"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Kontaktformular nutzen</a></div></div>
+<div class="pstep" id="ps2" hidden><h3>Ihr Preis</h3><div class="sum"><div id="vh" style="font-weight:600"></div><div class="lnks"><button type="button" class="lnk" data-go="0">Fahrzeug ändern</button><button type="button" class="lnk" data-go="1">Leistungen ändern</button></div><ul id="sl"></ul><div class="tt" id="tt"></div><small id="tn"></small><a class="btn" id="wa" href="#" target="_blank" rel="noopener"><svg class="ico-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.25-1.48-1.39-1.73-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.18-.48-.3z"/></svg>Per WhatsApp anfragen</a><a class="btn o2" href="tel:+436805020884"><svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Jetzt anrufen</a><div class="or"><span>oder</span></div><a class="btn o3" href="#kontakt"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Kontaktformular nutzen</a></div></div>
 </div>
 <p class="note">Richtwert inkl. USt., unverbindlich. Der genaue Preis hängt vom Fahrzeugzustand ab und wird nach der Besichtigung genannt.</p>
 </section>
 
 <section id="kontakt"><h2>Kontakt</h2>
 <div class="tabs" role="tablist">
-<button role="tab" aria-selected="true" aria-controls="p-wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>WhatsApp</button>
+<button role="tab" aria-selected="true" aria-controls="p-wa"><svg class="ico-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.25-1.48-1.39-1.73-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.18-.48-.3z"/></svg>WhatsApp</button>
 <button role="tab" aria-selected="false" aria-controls="p-mail"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>E-Mail</button>
 <button role="tab" aria-selected="false" aria-controls="p-tel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Anruf</button></div>
 <div class="panel" id="p-wa" role="tabpanel"><form id="form"></form></div>
 <div class="panel" id="p-mail" role="tabpanel" hidden>
 <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
 <a class="call" style="font-size:clamp(18px,4.5vw,26px);word-break:break-all" href="mailto:gs.carcare10@gmail.com">gs.carcare10@gmail.com</a>
-<a class="btn" id="mailbtn" href="mailto:gs.carcare10@gmail.com">E-Mail schreiben</a></div>
+<a class="btn" id="mailbtn" href="mailto:gs.carcare10@gmail.com"><svg class="ico-mail" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>E-Mail schreiben</a></div>
 <div class="panel" id="p-tel" role="tabpanel" hidden>
 <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div>
 <a class="call" href="tel:+436805020884">0680 502 08 84</a><a class="btn" href="tel:+436805020884"><svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Jetzt anrufen</a></div>
 </section>
 
 <section id="standort"><h2>Standort</h2>
-<address><b>Schmitzberg 5, 3312 Wallsee</b><span>Mo–Fr 08:00–17:00 Uhr · nur nach Terminvereinbarung</span></address>
-<a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Schmitzberg+5,+3312+Wallsee" target="_blank" rel="noopener">Route in Google Maps</a>
+<address>
+<div class="loc-head"><svg class="ico-pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg><b>Schmitzberg 5, 3312 Wallsee</b></div>
+<span class="term-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Nur nach Terminvereinbarung</span>
+</address>
+<a class="btn" id="routebtn" href="https://www.google.com/maps/dir/?api=1&destination=Schmitzberg+5,+3312+Wallsee" target="_blank" rel="noopener"><svg class="ico-route" viewBox="0 0 24 24" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Route planen</a>
 <div class="mapw" id="mapw"><iframe class="map" title="Karte Schmitzberg 5, 3312 Wallsee" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Schmitzberg+5,+3312+Wallsee&z=14&output=embed"></iframe><button type="button" class="mapov" id="mapov" aria-label="Karte aktivieren"><span>Karte antippen zum Bedienen</span></button></div>
 </section>
 </main>
 
-<footer><div class="w"><span>© 2026 GS CarCare · Inhaber: Sarcevic Mihael</span><span><a href="impressum.html">Impressum</a><a href="agb.html">AGB</a><a href="datenschutz.html">Datenschutz</a></span></div></footer>
+<footer><div class="w"><span>© 2026 GS CarCare</span><span><a href="impressum.html">Impressum</a><a href="agb.html">AGB</a><a href="datenschutz.html">Datenschutz</a></span></div></footer>
 
 
 <script>
@@ -504,12 +537,13 @@ const PIC=[
 ];
 
 $("#ls").innerHTML=SV.map((s,i)=>`<article class="lr"><div class="lt"><span class="n">${String(i+1).padStart(2,"0")}</span><h3>${s[0]}</h3><p>${s[1]}</p><small>${FACTS[i]}</small></div><div class="pic" style="background:${PIC[i]}"></div></article>`).join("");
-$("#form").innerHTML=`<label>Name<input name="n" required autocomplete="name"></label>
-<label>Fahrzeug (Modell, Baujahr) – optional<input name="v" autocomplete="off"></label>
-<div class="cfg-hint" id="cfgh"><b>Preis vorab berechnen</b><p>Optional – Sie können auch direkt eine Nachricht senden.</p><a class="btn o" href="#preise" data-pulse>Zum Preisrechner</a></div>
-<div class="lb" id="svwrap" hidden>Ihre Auswahl<small class="fi" id="fi"></small><div class="chips">${SV.map((s,i)=>`<label><input type="checkbox" data-i="${i}"><span>${s[0]}</span></label>`).join("")}</div><a class="lnk" href="#preise" data-pulse>Im Preisrechner ändern</a></div>
-<label>Nachricht<textarea name="m" rows="3" placeholder="Wunschtermin, Zustand, Fragen"></textarea></label>
-<button class="btn" type="submit"><svg class="ico-wa" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/><path d="M9.3 8.7c-.3.4-.3 1.1.3 2.1.8 1.3 1.9 2.4 3.2 3.1 1 .5 1.5.3 1.8 0l.5-.6a.5.5 0 0 0 0-.7l-1.1-.8a.5.5 0 0 0-.6 0l-.5.4a3.8 3.8 0 0 1-1.5-1.5l.4-.5a.5.5 0 0 0 0-.6l-.8-1.1a.5.5 0 0 0-.7 0z"/></svg>Per WhatsApp senden</button>`;
+const WA_ICO='<svg class="ico-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.25-1.48-1.39-1.73-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.18-.48-.3z"/></svg>';
+$("#form").innerHTML=`<label class="flabel"><span class="flabel-t">Name <span class="req">*</span></span><input name="n" required autocomplete="name" placeholder="Vor- und Nachname"></label>
+<label class="flabel"><span class="flabel-t">Fahrzeug <span class="opt">Optional</span></span><input name="v" autocomplete="off" placeholder="Modell, Baujahr (z. B. VW Golf 8, 2021)"></label>
+<div class="cfg-hint" id="cfgh"><b>Wunschpaket vorab zusammenstellen?</b><p>Optional – Sie können Ihre Anfrage auch direkt ohne Preisberechnung absenden.</p><a class="btn o" href="#preise" data-pulse>Zum Preisrechner</a></div>
+<div class="lb" id="svwrap" hidden><span class="flabel-t">Ausgewählte Leistungen</span><small class="fi" id="fi"></small><div class="chips">${SV.map((s,i)=>`<label><input type="checkbox" data-i="${i}"><span>${s[0]}</span></label>`).join("")}</div><a class="lnk" href="#preise" data-pulse>Im Preisrechner ändern</a></div>
+<label class="flabel"><span class="flabel-t">Ihre Nachricht <span class="opt">Optional</span></span><textarea name="m" rows="3" placeholder="Wunschtermin, Zustand des Fahrzeugs oder spezielle Fragen..."></textarea></label>
+<button class="btn" type="submit">${WA_ICO}Per WhatsApp senden</button>`;
 
 let atForm=false;
 function sync(){
@@ -568,8 +602,8 @@ $("#pl").addEventListener("click",e=>{
   const k=ct.closest(".card").dataset.k;
   k==="pol"?togglePol():toggle(+k);
 });
-const cap=$("#szcap"),capDef="Wählen Sie Ihre Fahrzeugklasse – Beispielmodelle sehen Sie beim Darüberfahren.";
-const capSet=i=>{const j=i==null?size:i;cap.textContent=j==null?capDef:SIZES[j][0]+": "+SIZES[j][1]};
+const cap=$("#szcap"),capDef="Wählen Sie Ihre Fahrzeugklasse – passende Beispielmodelle erscheinen beim Auswählen.";
+const capSet=i=>{const j=i==null?size:i;cap.innerHTML=j==null?capDef:"<strong>"+SIZES[j][0]+":</strong> "+SIZES[j][1]};
 $$("#sz .tile").forEach(t=>{const i=+t.dataset.z;["mouseenter","focus"].forEach(ev=>t.addEventListener(ev,()=>capSet(i)));["mouseleave","blur"].forEach(ev=>t.addEventListener(ev,()=>capSet()))});
 capSet();
 
@@ -659,6 +693,23 @@ document.addEventListener("touchstart",e=>{if(!mw.contains(e.target))mw.classLis
 sync();
 const tabs=$$(".tabs button");
 tabs.forEach(b=>b.addEventListener("click",()=>tabs.forEach(t=>{const on=t===b;t.setAttribute("aria-selected",on);document.getElementById(t.getAttribute("aria-controls")).hidden=!on})));
+/* Navigation ScrollSpy */
+const navLinks=$$("header nav a");
+const spySecs=[$("#leistungen"),$("#preise"),$("#kontakt"),$("#standort")].filter(Boolean);
+function updateSpy(){
+  const y=window.scrollY+140;
+  let cur="";
+  spySecs.forEach(s=>{if(y>=s.offsetTop&&y<s.offsetTop+s.offsetHeight)cur=s.id});
+  if(cur==="standort")cur="kontakt";
+  navLinks.forEach(a=>a.classList.toggle("act",a.getAttribute("href")==="#"+cur));
+}
+window.addEventListener("scroll",updateSpy,{passive:true});
+updateSpy();
+/* Apple Maps Route Detection */
+const rb=$("#routebtn");
+if(rb&&/Macintosh|iPhone|iPad|iPod/i.test(navigator.userAgent)){
+  rb.href="https://maps.apple.com/?daddr=Schmitzberg+5,+3312+Wallsee";
+}
 </script>
 </body>
 </html>

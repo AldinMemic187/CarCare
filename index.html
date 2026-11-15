@@ -892,8 +892,7 @@ $("#form").innerHTML=`<label class="flabel"><span class="flabel-t">Name <span cl
 <div class="cfg-hint" id="cfgh"><b>Wunschpaket vorab zusammenstellen?</b><p><span class="dl">Optional – Sie können Ihre Anfrage auch direkt ohne Preisberechnung absenden.</span><span class="ds">Anfrage auch ohne Preisberechnung möglich.</span></p><a class="btn o" href="#preise" data-pulse>Zum Preisrechner</a></div>
 <div class="lb" id="svwrap" hidden><span class="flabel-t">Ausgewählte Leistungen</span><small class="fi" id="fi"></small><div class="chips">${SV.map((s,i)=>i===3||i===4?"":`<label><input type="checkbox" data-i="${i}"><span>${i===2?"Lackpolitur":s[0]}</span></label>`).join("")}</div><a class="lnk" href="#preise" data-pulse>Im Preisrechner ändern</a></div>
 <label class="flabel"><span class="flabel-t">Ihre Nachricht <span class="opt">(optional)</span></span><textarea name="m" rows="4" enterkeyhint="done" placeholder="Wunschtermin oder Fragen …"></textarea></label>
-<button class="btn" type="submit">${WA_ICO}Per WhatsApp senden</button>
-<small class="fnote">Öffnet WhatsApp mit Ihrer vorbereiteten Nachricht.</small>`;
+<button class="btn" type="submit">${WA_ICO}Per WhatsApp senden</button>`;
 
 let atForm=false;
 function sync(){

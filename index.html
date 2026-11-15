@@ -599,6 +599,44 @@ section{padding:28px 0}
 /* Eigener Betrag: Eingabefeld nicht über die ganze Breite */
 .gs-own{justify-items:start}
 .gs-in{width:100%;max-width:220px}
+
+/* v12: Qualität – Farben passend zur Seite, Icon-Animation, ohne Nummern */
+.qpanel{background:radial-gradient(120% 90% at 100% 0%,rgba(239,238,233,.09),transparent 55%),linear-gradient(135deg,#1c1c1a,#262624)}
+.qtag{color:#efeee9}.qtag em{color:rgba(239,238,233,.6)}
+.q{background:rgba(239,238,233,.05);border-color:rgba(239,238,233,.13)}
+.q h3{color:#efeee9}.q p{color:rgba(239,238,233,.72)}
+.qi{color:#efeee9;border-color:rgba(239,238,233,.28);background:radial-gradient(circle at 30% 25%,rgba(239,238,233,.2),rgba(239,238,233,.04));box-shadow:0 0 22px rgba(239,238,233,.1)}
+.qi svg{transform-origin:50% 50%;transform-box:fill-box}
+@keyframes qbeat{0%,100%{transform:scale(1)}20%{transform:scale(1.3)}40%{transform:scale(1.05)}60%{transform:scale(1.25)}}
+@keyframes qdrop{0%,100%{transform:translateY(0) scale(1)}35%{transform:translateY(-4px) scale(.94,1.1)}65%{transform:translateY(1px) scale(1.08,.92)}}
+@keyframes qshield{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+@keyframes qcheck{0%{stroke-dashoffset:10}45%,100%{stroke-dashoffset:0}}
+.q:nth-child(3) .qi svg polyline{stroke-dasharray:10;stroke-dashoffset:0}
+.q:hover .qi svg,.q:active .qi svg{animation-duration:1.1s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+.q:nth-child(1):hover .qi svg,.q:nth-child(1):active .qi svg{animation-name:qbeat}
+.q:nth-child(2):hover .qi svg,.q:nth-child(2):active .qi svg{animation-name:qdrop}
+.q:nth-child(3):hover .qi svg,.q:nth-child(3):active .qi svg{animation-name:qshield}
+.q:nth-child(3):hover .qi svg polyline,.q:nth-child(3):active .qi svg polyline{animation:qcheck 1.1s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.q .qi svg,.q .qi svg polyline{animation:none!important}}
+
+/* v12: Standort – Reihenfolge Adresse, Route, Termin */
+#standort address{margin-bottom:14px}
+#standort #routebtn{margin:0 auto}
+#standort .term{display:block;max-width:460px;margin:20px auto 0;padding:0;text-align:center}
+#standort .term-t{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:16px;line-height:1.3}
+#standort .term-ic{display:grid;place-items:center;flex:none;width:auto;height:auto;margin:0;background:none;color:inherit}
+#standort .term-ic svg{width:22px;height:22px;display:block}
+#standort .term .t2{display:block;margin-top:4px;font-size:14px;line-height:1.45;color:var(--mut)}
+
+/* v12: Social-Buttons */
+.soc{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px}
+.soc-b{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;min-height:48px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg);font-weight:600;font-size:15px;text-decoration:none;transition:transform .18s cubic-bezier(.16,1,.3,1),border-color .2s,box-shadow .18s}
+.soc-b:hover{border-color:var(--fg);transform:translateY(-2px);box-shadow:0 6px 20px -4px rgba(0,0,0,.2)}
+.soc-b svg{width:22px;height:22px;flex:none}
+.soc-ig svg{stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.soc-wa svg{fill:currentColor;stroke:none}
+.soc-tt svg{fill:currentColor;stroke:none}
+@media (max-width:640px){.soc{flex-direction:column}.soc-b{justify-content:center;width:100%}}
 </style>
 </head>
 <body>
@@ -624,9 +662,9 @@ section{padding:28px 0}
 <section id="qualitaet"><div class="w"><h2>Qualität</h2>
 <div class="qpanel"><p class="qtag">Sauber ist Standard – <em>Detail ist Leidenschaft.</em></p>
 <div class="qs">
-<article class="q"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span><span class="qn">01</span><h3>Kundenzufriedenheit</h3><p>Ehrlichkeit, faire Preise und kulanter Service – ohne unnötige Leistungen aufzuschwatzen.</p></article>
-<article class="q"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.7s6 6.3 6 10.8a6 6 0 0 1-12 0C6 9 12 2.7 12 2.7z"/></svg></span><span class="qn">02</span><h3>Saubere Arbeitsweise</h3><p>Sorgfältige Handarbeit, hochwertige Produkte und viel Liebe zum Detail.</p></article>
-<article class="q"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span><span class="qn">03</span><h3>Zufriedenheitsgarantie</h3><p>Passt nach der Abholung etwas nicht? Melden Sie sich jederzeit – wir finden gemeinsam eine Lösung.</p></article>
+<article class="q"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span><h3>Kundenzufriedenheit</h3><p>Ehrlichkeit, faire Preise und kulanter Service – ohne unnötige Leistungen aufzuschwatzen.</p></article>
+<article class="q"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.7s6 6.3 6 10.8a6 6 0 0 1-12 0C6 9 12 2.7 12 2.7z"/></svg></span><h3>Saubere Arbeitsweise</h3><p>Sorgfältige Handarbeit, hochwertige Produkte und viel Liebe zum Detail.</p></article>
+<article class="q"><span class="qi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span><h3>Zufriedenheitsgarantie</h3><p>Passt nach der Abholung etwas nicht? Melden Sie sich jederzeit – wir finden gemeinsam eine Lösung.</p></article>
 </div></div></div></section>
 
 <section id="preise"><div class="w"><h2>Preise</h2>
@@ -658,16 +696,15 @@ section{padding:28px 0}
 <a class="btn" id="mailbtn" href="mailto:gs.carcare10@gmail.com"><svg class="ico-mail" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>E-Mail schreiben</a></div>
 <div class="panel" id="p-tel" role="tabpanel" hidden>
 <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div>
-<a class="call" href="tel:+436805020884">0680 502 08 84</a><a class="btn" href="tel:+436805020884"><svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Jetzt anrufen</a></div>
+<a class="call" style="font-size:clamp(17px,4.5vw,26px)" href="tel:+436805020884">0680 502 08 84</a><a class="btn" href="tel:+436805020884"><svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Jetzt anrufen</a></div>
 </div></section>
 
 <section id="standort"><div class="w"><h2>Standort</h2>
-<address>
-<div class="loc-head"><svg class="ico-pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg><b>Schmitzberg 5, 3312 Wallsee</b></div>
-<div class="term"><span class="term-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><div><b>Nur nach Terminvereinbarung</b><span class="t2">Bitte vorab per WhatsApp, E-Mail oder Telefon anfragen.</span></div></div>
-</address>
+<address><div class="loc-head"><svg class="ico-pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg><b>Schmitzberg 5, 3312 Wallsee</b></div></address>
 <a class="btn" id="routebtn" href="https://www.google.com/maps/dir/?api=1&destination=Schmitzberg+5,+3312+Wallsee" target="_blank" rel="noopener"><svg class="ico-route" viewBox="0 0 24 24" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Route planen</a>
+<div class="term"><b class="term-t"><span class="term-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>Nur nach Terminvereinbarung</b><span class="t2">Bitte vorab per WhatsApp, E-Mail oder Telefon anfragen.</span></div>
 <div class="mapw" id="mapw"><iframe class="map" title="Karte Schmitzberg 5, 3312 Wallsee" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Schmitzberg+5,+3312+Wallsee&z=14&output=embed"></iframe><button type="button" class="mapov" id="mapov" aria-label="Karte aktivieren"><span>Karte antippen zum Bedienen</span></button></div>
+<div class="soc"><a class="soc-b soc-ig" href="https://www.instagram.com/gs_carcare/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a><a class="soc-b soc-tt" href="https://www.tiktok.com/@gs_carcare" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 3c.3 2.4 1.7 4.1 4 4.3v3.1c-1.5.1-2.9-.4-4-1.2v6.2c0 3.2-2.4 5.6-5.5 5.6-3 0-5.4-2.4-5.4-5.4 0-3.3 2.8-5.8 6.2-5.3v3.2c-1.6-.4-3 .7-3 2.1 0 1.2.9 2.1 2.1 2.1 1.3 0 2.2-.9 2.2-2.4V3h3.4z"/></svg><span>TikTok</span></a><a class="soc-b soc-wa" href="https://wa.me/436805020884" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.25-1.48-1.39-1.73-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.18-.48-.3z"/></svg><span>WhatsApp</span></a><a class="soc-b" href="https://www.google.com/searchviewer/10?svid=CCYSESoPCg0vZy8xMXAyOG0zNDR3GAo" target="_blank" rel="noopener"><svg  viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>Google Rezensionen</span></a></div>
 </div></section>
 </main>
 
@@ -678,7 +715,7 @@ section{padding:28px 0}
 const WA="436805020884";
 const MAIL="gs.carcare10@gmail.com";
 const SV=[
-  ["Innenaufbereitung","Komplettes Aussaugen, Fußmatten, Kunststoffteile & Armaturen, Türverkleidung, Scheiben innen, Kofferraum, Sitze, Geruchsneutralisierung und Pflege der Kunststoffflächen. Je nach Nachfrage individuell gestaltbar."],
+  ["Innenaufbereitung","Aussaugen, Kunststoffteile, Scheiben innen, Sitze, Kofferraum und Geruchsneutralisierung."],
   ["Außenaufbereitung mit Basiswäsche","Vorwäsche, Handwäsche, Felgen- und Reifenreinigung, Reifenpflege, Trocknen, Scheiben außen, Kunststoffpflege und schnelles Finish."],
   ["Lackpolitur 1-Stufig","Gründliche Wäsche, Lackreinigung, Maschinenpolitur in 1 Stufe, Entfernung von Waschanlagen-Spuren, Glanz- und Tiefensteigerung, Quick-Shine-Finish und leichte Innenaufbereitung."],
   ["Lackpolitur 2-Stufig","Gründliche Wäsche, Lackreinigung, Maschinenpolitur in 2 Stufen, Entfernung von Waschanlagen-Spuren, Glanz- und Tiefensteigerung, Quick-Shine-Finish und leichte Innenaufbereitung."],
@@ -763,7 +800,7 @@ function getPriceStr(name,sz){
 
 const ICON='<div class="corner"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>';
 const FACTS=[
-  "Aussaugen · Scheiben · Sitze · Geruchsneutralisierung · Aufpreis möglich: starke Verschmutzung +20–50 €, Tierhaare +20–40 €, Extraktion +20–40 €",
+  "Aufpreis bei starker Verschmutzung möglich",
   "Vorwäsche · Handwäsche · Felgen & Reifen · Trocknen",
   "1 Polierstufe","2 Polierstufen","3 Polierstufen",
   "Punktuelles Ausschleifen · auf Anfrage",
@@ -815,7 +852,7 @@ const picHTML=(i)=>{
 };
 const LS=SV.map((s,i)=>i).filter(i=>i!==3&&i!==4);
 $("#ls").innerHTML=LS.map((i,j)=>{
-  const s=SV[i],num='<span class="n">'+String(j+1).padStart(2,"0")+'</span>';
+  const s=SV[i],num='';
   if(i===2)return `<article class="lr lr-2"><div class="lt">${num}<h3>Lackpolitur</h3><p><span class="dl">Gründliche Wäsche, Lackreinigung, Maschinenpolitur, Entfernung von Waschanlagen-Spuren, Glanz- und Tiefensteigerung, Quick-Shine-Finish und leichte Innenaufbereitung – in drei Stufen.</span><span class="ds">In drei Stufen – inkl. Wäsche und leichter Innenaufbereitung.</span></p><ol class="stg">${STG.map((t,k)=>`<li>${chev(k+1)}<b>Stufe ${k+1}</b><span>${t}</span></li>`).join("")}</ol></div>${picHTML(2)}</article>`;
   return `<article class="lr lr-${i}"><div class="lt">${num}<h3>${s[0]}</h3><p>${dsc(i)}</p><small class="facts">${FACTS[i]}</small></div>${picHTML(i)}</article>`;
 }).join("");
@@ -858,13 +895,13 @@ $("#form").addEventListener("submit",e=>{e.preventDefault();
 
 /* Preisrechner - 7 Fahrzeugkategorien */
 const CAR=[
-  '<path d="M6 22v-5l6-2 5-6h14l6 7 2 2 19 0v4"/>',
-  '<path d="M4 22v-5l8-2 6-6h18l7 7 3 2 12 0v4"/>',
-  '<path d="M3 22v-5l10-2 6-6h20l9 5 10 2 0 6"/>',
-  '<path d="M4 22v-8l7-3 6-5h20l8 7 13 2v7"/>',
-  '<path d="M3 22v-9l7-3 6-5h24l9 8 9 2v7"/>',
-  '<path d="M3 22v-8l6-6 8-3h26l9 7 6 3v7"/>',
-  '<path d="M3 22V7l4-2h40l10 8 4 2v7"/>'
+  '<path d="M8 22v-6l3-2 4-6h16l7 7h10l5 3v4"/><path d="M17 14l3-4h9l5 4z"/>',
+  '<path d="M5 22v-5l4-2 5-7h17l8 7h12l6 3v4"/><path d="M16 14l3-4h10l5 4z"/>',
+  '<path d="M3 22v-5l9-1 6-6h17l8 6h10l6 2v4"/><path d="M20 15l3-4h11l4 4z"/><path d="M29 11v4"/>',
+  '<path d="M4 22V12l3-2 4-5h26l8 7h12l4 3v7"/><path d="M13 11l2-4h20l5 4z"/><path d="M25 7v4"/>',
+  '<path d="M3 22V11l4-2 4-6h30l8 8h9l3 3v8"/><path d="M13 9l2-4h24l5 4z"/><path d="M22 5v4M31 5v4"/>',
+  '<path d="M4 22V12l6-7h22l18 8h6l3 3v6"/><path d="M14 12l3-5h13l9 5z"/><path d="M24 7v5"/>',
+  '<path d="M3 22V6l2-2h36l12 9h6l2 2v7"/><path d="M42 7l7 6h-7z"/><path d="M36 8v9"/>'
 ];
 
 $("#sz").innerHTML=SIZES.map((z,i)=>`<button type="button" class="tile" data-z="${i}" title="${z[1]}" style="--d:${i}" aria-pressed="false"><svg viewBox="0 0 64 30">${CAR[i]}<circle cx="19" cy="23" r="3.5"/><circle cx="47" cy="23" r="3.5"/></svg><b>${z[0].replace("Kompaktklasse","Kompakt&shy;klasse")}</b><small>${z[1]}</small></button>`).join("");
@@ -988,7 +1025,7 @@ const REVIEWS=[["matthias buder", 5, "Top!!! Sehr gute Arbeit und top Preis!"], 
   const avg=REVIEWS.reduce((a,r)=>a+r[1],0)/REVIEWS.length,cnt=GGL.count||REVIEWS.length;
   $("#rvavg").textContent=avg.toFixed(1).replace(".",",");
   $("#rvst").textContent=stars(Math.round(avg));
-  $("#rvcnt").textContent=cnt+(cnt===1?" Google-Rezension":" Google-Rezensionen");
+  $("#rvcnt").textContent="Google-Rezensionen";
   $("#rvlink").href=GGL.url;
   const card=(r,dup)=>`<article class="rc"${dup?' aria-hidden="true"':""}><div class="rc-h"><span class="rc-av" aria-hidden="true">${esc(nm(r[0])[0])}</span><div class="rc-n"><b>${esc(nm(r[0]))}</b><span class="stars" aria-label="${r[1]} von 5 Sternen">${stars(r[1])}</span></div><span class="rc-g">${G}</span></div><p>${esc(r[2])}</p></article>`;
   const band=$("#rvband"),tr=$("#rvtrack");let sw=0,x=0;

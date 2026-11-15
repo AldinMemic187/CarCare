@@ -479,11 +479,12 @@ section{padding:28px 0}
 .rv-sum .btn{margin-left:auto;min-height:44px;padding:10px 18px;font-size:15px}
 @media (max-width:640px){.rv-sum .btn{margin-left:0;width:100%}}
 .rv-band{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.rv-track{display:flex;width:max-content;animation:rvm var(--rv-d,40s) linear infinite;will-change:transform}
+.rv-track{display:flex;width:max-content;will-change:transform}
+.rv-band{cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.rv-band.drag{cursor:grabbing}
 @keyframes rvm{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
 .rv-set{display:flex;gap:14px;padding-right:14px}
-.rv-band:hover .rv-track,.rv-band:focus-within .rv-track,.rv-band.off .rv-track{animation-play-state:paused}
-.rc{flex:none;width:min(300px,78vw);display:flex;flex-direction:column;gap:10px;padding:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;white-space:normal;hyphens:auto;overflow-wrap:break-word}
+.rc{flex:none;width:min(320px,80vw);display:flex;flex-direction:column;gap:10px;padding:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;white-space:normal;hyphens:auto;overflow-wrap:break-word}
 .rc-h{display:flex;align-items:center;gap:10px;min-width:0}
 .rc-av{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--acc);color:var(--onacc);font-weight:700}
 .rc-n{display:grid;gap:3px;min-width:0;flex:1}
@@ -492,6 +493,30 @@ section{padding:28px 0}
 .rc-g{flex:none;width:20px;height:20px;display:block}.rc-g svg{width:20px;height:20px;display:block}
 .rc p{margin:0;font-size:14.5px;line-height:1.5;color:var(--fg)}
 @media (prefers-reduced-motion:reduce){.rv-track{animation:none;width:auto}.rv-band{overflow-x:auto;-webkit-mask-image:none;mask-image:none;scroll-snap-type:x mandatory}.rv-set{scroll-snap-align:start}.rv-set.dup{display:none}}
+
+/* v8: Überschrift mit möglichst wenig Umbrüchen */
+.hero-in{max-width:min(920px,100%)}
+.hero h1{font-size:clamp(30px,4.6vw,58px);letter-spacing:-.02em}
+.hero .lead,.hero .hmeta{max-width:640px}
+@media (max-width:640px){.hero h1{font-size:min(7.4vw,38px);letter-spacing:-.025em}}
+@media (orientation:landscape) and (max-height:520px){.hero-in{max-width:min(860px,100%)}.hero h1{font-size:clamp(24px,4.2vw,36px)}}
+.rv-set{align-items:stretch}
+@media (max-width:640px){.rc{width:min(340px,86vw);padding:16px}.rc p{font-size:14px;line-height:1.45}}
+.rc,.rc *{hyphens:manual;-webkit-hyphens:manual}
+
+/* v9: Terminhinweis – schlicht, passend zum Rest (ohne Box) */
+.term{display:flex;align-items:center;justify-content:center;gap:14px;max-width:460px;margin:8px auto 0;padding:0;border:0;border-radius:0;background:none;text-align:left}
+.term-ic{flex:none;width:42px;height:42px;border-radius:10px;display:grid;place-items:center;background:var(--acc);color:var(--onacc)}
+.term-ic svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.term b{font-size:16px}
+.term .t2{font-size:14px}
+
+/* v10: Terminhinweis-Icon wie das Standort-Icon (ohne Hintergrund) */
+.term{gap:10px}
+.term-ic{width:auto;height:auto;border-radius:0;background:none;color:inherit;display:block;flex:none}
+.term-ic svg{width:24px;height:24px;display:block;stroke-width:1.9}
+.term{align-items:flex-start}
+.term-ic{margin-top:-1px}
 </style>
 </head>
 <body>
@@ -808,11 +833,11 @@ $$("[data-go]").forEach(b=>b.onclick=()=>go(+b.dataset.go));
 /* Google-Rezensionen */
 const GGL={url:"https://www.google.com/searchviewer/10?svid=CCYSESoPCg0vZy8xMXAyOG0zNDR3GAo",count:null,anon:true};
 /* Format je Rezension: ["Name", Sterne (1-5), "Text"] – Text bitte unverändert aus Google kopieren */
-const REVIEWS=[];
+const REVIEWS=[["matthias buder", 5, "Top!!! Sehr gute Arbeit und top Preis!"], ["Darijo Gvozden", 5, "Ein junges Unternehmen mit ganz viel Herz und noch mehr Können! Ich habe mein Auto bei GS CarCare aufbereiten lassen und bin vom Ergebnis überwältigt. Die Begeisterung für Fahrzeugpflege spiegelt sich in jedem einzelnen Detail wider. Absolut zuverlässig, extrem gründlich und super herzlich im Umgang. Wer sein Auto in beste Hände geben möchte, ist hier genau richtig!"], ["Ioachim Capatina", 5, "Habe mein skoda Octavia zum innenreinigung gebracht, es schaute sehr sehr schlimm schon aus aufgrund von essen und trinken in auto und natürlich wegen mein Sohn. Nach der besuch habe ich mein auto nicht mehr erkannt da es so sauber war. Ich war so begeistert und glücklich mit den innenreinigung das sogar meine Freundin mit ihre Audi A1 auch gleich ein termin wollte für Innenreinigung und außenreinigung. Über das Ergebnis war sie auch begeistert und glücklich. Falls es mir nicht glaubt schaut’s es euch gerne auf Instagram, beide autos sind weiß."], ["emanuel kljajic", 5, "Ich hab eine innenreinigung genommen dazu noch bremstattel umlackieren und ich muss sagen es hat sich aufjednfall gelohnt. war ein ganz anderes gefühl danach im auto genauso wie außen die bremsattel haben echt viel am look verändert und so verostet wie sie waren hab ich nicht gedacht dss sie so gut ausehen würden. Es lief auch alles reibungloss ab Führer war auch sehr freundlich und nett und für den preis war es hervoragend könnte ich nur weiter empfehlen weil man merkt es geht nicht nicht nur um so schnell wie möglich zu sein sondern schön sauber an"], ["Emirhan Akdemir", 5, "Gute Arbeit!👍"]];
 (function(){
   const sec=$("#bewertungen");if(!sec||!REVIEWS.length)return;
   const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  const nm=n=>{const q=n.trim().split(/\s+/);return GGL.anon&&q.length>1?q[0]+" "+q[q.length-1][0].toUpperCase()+".":q.join(" ")};
+  const cap=w=>w.charAt(0).toUpperCase()+w.slice(1);const nm=n=>{const q=n.trim().split(/\s+/).map(cap);return GGL.anon&&q.length>1?q[0]+" "+q[q.length-1][0]+".":q.join(" ")};
   const stars=n=>"★".repeat(n)+"☆".repeat(5-n);
   const G=sec.querySelector(".ico-g").outerHTML;
   const avg=REVIEWS.reduce((a,r)=>a+r[1],0)/REVIEWS.length,cnt=GGL.count||REVIEWS.length;
@@ -821,18 +846,53 @@ const REVIEWS=[];
   $("#rvcnt").textContent=cnt+(cnt===1?" Google-Rezension":" Google-Rezensionen");
   $("#rvlink").href=GGL.url;
   const card=(r,dup)=>`<article class="rc"${dup?' aria-hidden="true"':""}><div class="rc-h"><span class="rc-av" aria-hidden="true">${esc(nm(r[0])[0])}</span><div class="rc-n"><b>${esc(nm(r[0]))}</b><span class="stars" aria-label="${r[1]} von 5 Sternen">${stars(r[1])}</span></div><span class="rc-g">${G}</span></div><p>${esc(r[2])}</p></article>`;
-  const band=$("#rvband"),tr=$("#rvtrack");
+  const band=$("#rvband"),tr=$("#rvtrack");let sw=0,x=0;
   const build=()=>{
     tr.innerHTML='<div class="rv-set">'+REVIEWS.map(r=>card(r,false)).join("")+'</div>';
     const set=tr.firstChild,w=band.clientWidth;let k=0;
     while(set.scrollWidth<w*1.2&&k++<8)set.insertAdjacentHTML("beforeend",REVIEWS.map(r=>card(r,true)).join(""));
-    const sw=set.scrollWidth;
     tr.insertAdjacentHTML("beforeend",'<div class="rv-set dup" aria-hidden="true">'+set.innerHTML+'</div>');
-    tr.style.setProperty("--rv-d",Math.max(24,sw/45)+"s");
+    sw=tr.getBoundingClientRect().width/2;
   };
   sec.hidden=false;build();
   let t;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(build,250)});
-  new IntersectionObserver(([e])=>band.classList.toggle("off",!e.isIntersecting)).observe(band);
+
+  /* Auto-Lauf nach rechts + Ziehen (nur horizontal), nach kurzer Pause läuft es von selbst weiter */
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const SPEED=45,RESUME=1600;
+  let vis=true,drag=false,sx=0,sp=0,vel=0,lx=0,lt=0,idle=0,last=performance.now();
+  new IntersectionObserver(([e])=>{vis=e.isIntersecting}).observe(band);
+  const wrap=()=>{if(sw>0)x=((x%sw)+sw)%sw-sw};
+  const tick=t=>{
+    const dt=Math.min(.05,(t-last)/1000);last=t;
+    if(!drag){
+      if(Math.abs(vel)>8){x+=vel*dt;vel*=Math.exp(-4*dt);if(Math.abs(vel)<=8){vel=0;idle=t+RESUME}}
+      else if(t>=idle&&vis)x+=SPEED*dt;
+    }
+    wrap();tr.style.transform="translate3d("+x+"px,0,0)";
+    requestAnimationFrame(tick);
+  };
+  band.addEventListener("pointerdown",e=>{
+    if(e.pointerType==="mouse"&&e.button!==0)return;
+    drag=true;sx=e.clientX;sp=x;vel=0;lx=e.clientX;lt=performance.now();
+    band.classList.add("drag");
+    if(e.pointerType==="mouse")try{band.setPointerCapture(e.pointerId)}catch(_){}
+  });
+  band.addEventListener("pointermove",e=>{
+    if(!drag)return;
+    x=sp+(e.clientX-sx);
+    const n=performance.now(),d=n-lt;
+    if(d>0){vel=.7*vel+.3*((e.clientX-lx)/d*1000)}
+    lx=e.clientX;lt=n;
+  });
+  const end=()=>{
+    if(!drag)return;drag=false;band.classList.remove("drag");
+    if(performance.now()-lt>80)vel=0;
+    idle=performance.now()+RESUME;
+  };
+  ["pointerup","pointercancel","lostpointercapture"].forEach(n=>band.addEventListener(n,end));
+  band.addEventListener("dragstart",e=>e.preventDefault());
+  requestAnimationFrame(tick);
 })();
 /* Header, Hero, Video */
 const hd=document.querySelector("header"),hero=$(".hero"),hv=$("#hv");

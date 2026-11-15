@@ -665,6 +665,8 @@ section{padding:28px 0}
 #kontakt .chips span{min-height:44px;display:flex;align-items:center}
 #kontakt form>.btn[type=submit]{min-height:54px;font-size:17px}
 }
+
+.pcard{scroll-margin-top:72px}
 </style>
 </head>
 <body>
@@ -736,7 +738,7 @@ section{padding:28px 0}
 </div></section>
 </main>
 
-<footer><div class="w"><span>© 2026 GS CarCare</span><span><a href="impressum.html">Impressum</a><a href="agb.html">AGB</a><a href="datenschutz.html">Datenschutz</a><a href="https://www.instagram.com/gs_carcare" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@gs_carcare" target="_blank" rel="noopener">TikTok</a></span></div></footer>
+<footer><div class="w"><span>© 2026 GS CarCare</span><span><a href="impressum.html">Impressum</a><a href="agb.html">AGB</a><a href="datenschutz.html">Datenschutz</a></span></div></footer>
 
 
 <script>
@@ -1007,7 +1009,7 @@ function go(n){
   if(n===2&&!done){done=true;showCfg()}
   step=n;[0,1,2].forEach(i=>$("#ps"+i).hidden=i!==n);$("#back").hidden=n===0;upDots();
   if(n===0)capSet();
-  if(innerWidth<=900||innerHeight<=520){const pc=$(".pcard"),r=pc.getBoundingClientRect();if(r.top<60||r.top>innerHeight*.4)pc.scrollIntoView({behavior:"smooth",block:"start"})}
+  requestAnimationFrame(()=>{const pc=$(".pcard"),r=pc.getBoundingClientRect();if(r.top<60||r.top>innerHeight*.4)pc.scrollIntoView({behavior:"smooth",block:"start"})});
 }
 $("#back").onclick=()=>go(step-1);
 $("#pnext").onclick=()=>{if(sel.size)go(2)};

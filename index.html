@@ -687,6 +687,16 @@ section{padding:28px 0}
 .sum .lnks{gap:8px}
 .sum .lnks .lnk{white-space:nowrap;font-size:13.5px;padding:8px 4px}
 @media(max-width:380px){.sum .lnks .lnk{font-size:12.5px}}
+/* Sitzreinigung: Anzahl Sitze */
+.seats{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:6px 6px 6px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--fg);font-size:13px;font-weight:600}
+.card .seats span{display:inline;color:inherit;font-size:13px}
+.card .seats{grid-column:1/-1;grid-row:2}
+.stp{display:flex;align-items:center;gap:4px}
+.stp button{width:44px;height:44px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit;font-size:22px;line-height:1;cursor:pointer;transition:background .2s}
+.stp button:hover:not(:disabled){background:var(--line)}
+.stp button:disabled{opacity:.35;cursor:default}
+.stp button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
+.stp output{min-width:34px;text-align:center;font-size:17px;font-weight:700}
 </style>
 </head>
 <body>
@@ -771,7 +781,7 @@ const SV=[
   ["Lackpolitur 3-Stufig","Gründliche Wäsche, Lackreinigung, Maschinenpolitur in 3 Stufen, Entfernung von Waschanlagen-Spuren, Glanz- und Tiefensteigerung, Quick-Shine-Finish und leichte Innenaufbereitung."],
   ["Kratzer entfernen","Punktuelle Beseitigung und Ausschleifen tieferer Kratzer im Lack (Preis auf Anfrage)."],
   ["Teppich- & Fußmattenreinigung","Gründliche Reinigung von Teppich und Fußmatten."],
-  ["Sitzreinigung","Gründliche Reinigung der Sitze – pro Sitz buchbar."],
+  ["Sitzreinigung","Gründliche Sitzreinigung inklusive Nasssaugen – auch einzeln buchbar, Preis pro Sitz (12 €)."],
   ["Lederreinigung & Pflege","Reinigung und Pflege der Lederflächen."],
   ["Tierhaarentfernung","Gründliche Spezialentfernung hartnäckiger Tierhaare aus Polstern, Teppich und Kofferraum."],
   ["Motorraum-Reinigung","Fachgerechte Reinigung des Motorraums."],
@@ -797,7 +807,7 @@ const PR={
   "Lackpolitur 3-Stufig":[230,240,250,290,330,330,null],
   "Kratzer entfernen":[null,null,null,null,null,null,null],
   "Teppich- & Fußmattenreinigung":[40,40,40,40,40,40,40],
-  "Sitzreinigung":[10,10,10,10,10,10,10],
+  "Sitzreinigung":[12,12,12,12,12,12,12],
   "Lederreinigung & Pflege":[50,50,50,50,50,50,50],
   "Tierhaarentfernung":[40,40,40,40,40,40,40],
   "Motorraum-Reinigung":[40,40,40,40,40,40,40],
@@ -813,7 +823,7 @@ const SS=[
   "3 Polierstufen inkl. Wäsche, Lackreinigung und Quick-Shine-Finish.",
   "Punktuelles Ausschleifen tieferer Kratzer (auf Anfrage).",
   "Reinigung von Teppich und Fußmatten.",
-  "Reinigung der Sitze – pro Sitz buchbar.",
+  "Sitzreinigung inkl. Nasssaugen – 12 € pro Sitz.",
   "Reinigung und Pflege der Lederflächen.",
   "Spezialentfernung von Tierhaaren aus Polstern, Teppich und Kofferraum.",
   "Fachgerechte Reinigung des Motorraums.",
@@ -821,7 +831,8 @@ const SS=[
   "Lenkrad, Wabengrill, Diffusor, Stoßstange u. a."
 ];
 const dsc=i=>'<span class="dl">'+SV[i][1]+'</span><span class="ds">'+SS[i]+'</span>';
-let size=null,step=0,tier=0,done=false,lastTT="";
+let size=null,step=0,tier=0,done=false,lastTT="",seats=1;
+const SEAT="Sitzreinigung",MAXS=9;
 const POL=[SV[2][0],SV[3][0],SV[4][0]];
 const sel=new Set(),$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const list=()=>SV.map(s=>s[0]).filter(n=>sel.has(n));
@@ -854,7 +865,7 @@ const FACTS=[
   "1 Polierstufe","2 Polierstufen","3 Polierstufen",
   "Punktuelles Ausschleifen · auf Anfrage",
   "Teppich · Fußmatten · 40 €",
-  "10 € pro Sitz",
+  "12 € pro Sitz · inkl. Nasssaugen",
   "Lederreinigung · Pflege · ab 50 €",
   "Spezialwerkzeuge · Polster, Teppich & Kofferraum",
   "Motorraum · 40 €",
@@ -915,7 +926,7 @@ $("#form").innerHTML=`<label class="flabel"><span class="flabel-t">Name <span cl
 
 let atForm=false;
 function sync(){
-  SV.forEach((s,i)=>{const inp=$(`.chips input[data-i="${i}"]`);if(!inp)return;const pol=POL.some(p=>sel.has(p));inp.checked=i===2?pol:sel.has(s[0]);if(i===2)inp.nextElementSibling.textContent=pol?lbl(POL.find(p=>sel.has(p))):"Lackpolitur"});
+  SV.forEach((s,i)=>{const inp=$(`.chips input[data-i="${i}"]`);if(!inp)return;const pol=POL.some(p=>sel.has(p));inp.checked=i===2?pol:sel.has(s[0]);if(i===2)inp.nextElementSibling.textContent=pol?lbl(POL.find(p=>sel.has(p))):"Lackpolitur";if(i===7)inp.nextElementSibling.textContent=sel.has(SEAT)?lbl(SEAT):SEAT});
   const n=sel.size;
   renderPrice();
   $("#fi").innerHTML=(size!==null?SIZES[size][0]+" · ":"")+(n?n+" gewählt":"keine Leistung gewählt")+(lastTT?" · Richtwert "+lastTT:"")+'<span class="dl"> · Mehrfachauswahl möglich</span>';
@@ -959,11 +970,14 @@ let di=0;
 const cardHTML=k=>{
   const pol=k==="pol",x=pol?SV[2]:SV[k],d=di++;
   return `<div class="card" data-k="${k}" style="--d:${d}">${ICON}<button type="button" class="ct" aria-pressed="false"><b>${pol?"Lackpolitur":x[0]}</b><span class="cd">${dsc(pol?2:k)}</span></button>`
+  +(k===7?`<div class="seats" role="group" aria-label="Anzahl Sitze"><span>Anzahl Sitze</span><div class="stp"><button type="button" data-s="-1" aria-label="Einen Sitz weniger">−</button><output aria-live="polite">1</output><button type="button" data-s="1" aria-label="Einen Sitz mehr">+</button></div></div>`:"")
   +(pol?`<div class="tiers" role="group" aria-label="Politurstufe">${[0,1,2].map(t=>`<button type="button" data-t="${t}" aria-pressed="false">Stufe ${t+1}<small></small></button>`).join("")}</div>`:"")
   +`<div class="c-price"></div><div class="pick"><i class="tick"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></i><em style="font-style:normal">Auswählen</em></div></div>`;
 };
 $("#pl").innerHTML=GR.map(g=>`<div class="pgrp"><h4 class="gh">${g[0]}</h4><div class="cards">${g[1].map(cardHTML).join("")}</div></div>`).join("");
 $("#pl").addEventListener("click",e=>{
+  const sb=e.target.closest(".stp button");
+  if(sb){seats=Math.min(MAXS,Math.max(1,seats+(+sb.dataset.s)));sel.add(SEAT);sync();return}
   const tb=e.target.closest(".tiers button");
   if(tb){setTier(+tb.dataset.t);return}
   const ct=e.target.closest(".ct");if(!ct)return;
@@ -978,7 +992,7 @@ capSet();
 let shown=0;
 function count(to){const from=shown,t0=performance.now();shown=to;(function f(t){const k=Math.min(1,(t-t0)/350),v=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));$("#tt").textContent=to?"ab "+fmt(v)+" €":"";if(k<1)requestAnimationFrame(f)})(t0)}
 
-const INFO={in:"Aufpreis bei starker Verschmutzung +20–50 €, Tierhaaren +20–40 €, Sitz-/Teppich-Extraktion +20–40 €.",pol:"Der Preis hängt vom Zustand des Fahrzeugs ab."};
+const INFO={in:"Aufpreis bei starker Verschmutzung +20–50 €, Tierhaaren +20–40 €, Sitz-/Teppich-Extraktion +20–40 €.",pol:"Der Preis hängt vom Zustand des Fahrzeugs ab.",seat:"Inklusive Nasssaugen. 12 € pro Sitz."};
 const closeTips=x=>$$("#sl .ib").forEach(b=>{if(b!==x){b.setAttribute("aria-expanded","false");b.closest("li").querySelector(".tip").hidden=true}});
 $("#sl").addEventListener("click",e=>{
   const b=e.target.closest(".ib");closeTips(b);
@@ -988,7 +1002,7 @@ $("#sl").addEventListener("click",e=>{
 });
 document.addEventListener("pointerdown",e=>{if(!e.target.closest("#sl"))closeTips()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeTips()});
-const lbl=n=>{const i=POL.indexOf(n);return i>-1?"Lackpolitur · Stufe "+(i+1):n};
+const lbl=n=>{const i=POL.indexOf(n);return i>-1?"Lackpolitur · Stufe "+(i+1):n===SEAT?SEAT+" · "+seats+(seats===1?" Sitz":" Sitze"):n};
 const tierPrice=t=>{if(size===null)return"";const v=PR[POL[t]][size];return typeof v==="number"&&v>0?"ab "+fmt(v)+" €":"Anfrage"};
 function upDots(){const d=$$(".dots button");d[1].disabled=size===null;d[2].disabled=size===null||!sel.size;d.forEach((b,i)=>b.classList.toggle("on",i<=step))}
 function renderPrice(){
@@ -1000,6 +1014,7 @@ function renderPrice(){
     c.querySelector(".ct").setAttribute("aria-pressed",on);
     c.querySelector("em").textContent=on?"Ausgewählt":"Auswählen";
     c.querySelector(".c-price").textContent=getPriceStr(nm,size);
+    if(k==="7"){const u=PR[SEAT][size==null?0:size];c.querySelector(".c-price").textContent=on&&seats>1&&size!==null?seats+" × "+fmt(u)+" € = "+fmt(u*seats)+" €":getPriceStr(nm,size);c.querySelector(".seats output").textContent=seats;const sbs=c.querySelectorAll(".stp button");sbs[0].disabled=seats<=1;sbs[1].disabled=seats>=MAXS}
     if(pol){
       c.querySelector(".cd").innerHTML=dsc(2+tier);
       c.querySelectorAll(".tiers button").forEach((b,t)=>{b.setAttribute("aria-pressed",t===tier);b.querySelector("small").textContent=tierPrice(t)});
@@ -1008,8 +1023,8 @@ function renderPrice(){
   const L=list();let tot=0,ask=false;
   const rows=L.map(n=>{
     const p=PR[n],v=size===null||!p?null:p[size];let pl;
-    if(typeof v==="number"&&v>0){tot+=v;pl=pf(n,v)}else{ask=true;pl="auf Anfrage"}
-    const inf=n===SV[0][0]?INFO.in:(POL.includes(n)?INFO.pol:"");
+    if(typeof v==="number"&&v>0){const m=n===SEAT?seats:1;tot+=v*m;pl=n===SEAT?fmt(v*m)+" €":pf(n,v)}else{ask=true;pl="auf Anfrage"}
+    const inf=n===SV[0][0]?INFO.in:(POL.includes(n)?INFO.pol:(n===SEAT?INFO.seat:""));
     return `<li><div class="rl">${lbl(n)}${inf?`<button type="button" class="ib" aria-label="Info zu ${lbl(n)}" aria-expanded="false">i</button>`:""}</div><span>${pl}</span>${inf?`<div class="tip" role="tooltip" hidden>${inf}</div>`:""}</li>`;
   });
   lastTT=tot>0?"ab "+fmt(tot)+" €":"";

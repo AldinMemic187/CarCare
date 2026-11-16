@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GS CarCare – Fahrzeugaufbereitung & Detailing in Wallsee</title>
+<title>GS CarCare - Aufbereitung & Detailing</title>
 <meta name="description" content="GS CarCare in 3312 Wallsee: Innenaufbereitung, Außenaufbereitung mit Basiswäsche, 1-3 stufige Lackpolitur, Kratzer entfernen, Detailing & optische Umbauten.">
 <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
@@ -105,6 +105,12 @@ footer a:hover, footer button:hover{color:var(--fg);text-decoration:underline}
 .sum ul{list-style:none;margin:14px 0;padding:0;display:grid;gap:8px;font-size:15px}
 .sum li{display:flex;justify-content:space-between;gap:12px}.sum li span{opacity:.7;white-space:nowrap}
 .sum .e{opacity:.6}
+.sum li{position:relative;align-items:flex-start}
+.sum .rl{display:inline-flex;align-items:center;gap:8px;min-width:0}
+.sum .ib{position:relative;flex:none;width:24px;height:24px;padding:0;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;opacity:.75;font:italic 700 13px/1 Georgia,serif;cursor:pointer;touch-action:manipulation;display:inline-grid;place-items:center}
+.sum .ib::after{content:"";position:absolute;inset:-10px}
+.sum .ib:hover,.sum .ib[aria-expanded=true]{opacity:1}
+.sum .tip{position:absolute;left:0;top:calc(100% + 6px);z-index:5;max-width:min(300px,100%);padding:10px 12px;border-radius:10px;background:var(--bg);color:var(--fg);border:1px solid var(--line);box-shadow:0 10px 28px -10px rgba(0,0,0,.4);font-size:13px;line-height:1.45}
 .sum .tt{font-size:clamp(34px,6vw,46px);font-weight:700;line-height:1.1;margin:18px 0 4px;border-top:1px solid color-mix(in srgb,var(--onacc) 25%,transparent);padding-top:18px}
 .sum small{display:block;opacity:.65;font-size:13px;margin-bottom:18px}
 .sum .btn{display:block;background:var(--bg);color:var(--fg)}
@@ -549,7 +555,7 @@ section{padding:28px 0}
 .stg b{font-size:14.5px}
 .stg span{font-size:14px;color:var(--mut)}
 @media (prefers-reduced-motion:reduce){.stg .chv polyline{animation:none}}
-#tn{display:grid;gap:4px}
+#tn{display:grid;gap:4px}#tn span{display:block}
 @media (min-width:641px){.lt{padding-right:72px}}
 
 /* v12: Lackpolitur-Stufen als dreiteilige Steigerung */
@@ -710,7 +716,6 @@ section{padding:28px 0}
 <div class="pstep" id="ps1" hidden><h3>Leistungen wählen</h3><div class="ctx"><span id="ctxv"></span><button type="button" class="lnk" data-go="0">Ändern</button></div><div id="pl"></div><button class="btn" id="pnext" type="button">Weiter</button></div>
 <div class="pstep" id="ps2" hidden><h3>Ihr Preis</h3><div class="sum"><div id="vh" style="font-weight:600"></div><div class="lnks"><button type="button" class="lnk" data-go="0">Fahrzeug ändern</button><button type="button" class="lnk" data-go="1">Leistungen ändern</button></div><ul id="sl"></ul><div class="tt" id="tt"></div><small id="tn"></small><a class="btn" id="wa" href="#" target="_blank" rel="noopener"><svg class="ico-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.25-1.48-1.39-1.73-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.18-.48-.3z"/></svg>Per WhatsApp anfragen</a><a class="btn o2" href="tel:+436805020884"><svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>Jetzt anrufen</a><div class="or"><span>oder</span></div><a class="btn o3" href="#kontakt"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Kontaktformular nutzen</a></div></div>
 </div>
-<p class="note"><span class="dl">Richtwert inkl. USt., unverbindlich. Der genaue Preis hängt vom Fahrzeugzustand ab und wird nach der Besichtigung genannt.</span><span class="ds">Richtwert inkl. USt., unverbindlich. Genauer Preis nach Besichtigung.</span></p>
 <div class="gs" id="gutschein"></div>
 </div></section>
 
@@ -964,6 +969,16 @@ capSet();
 let shown=0;
 function count(to){const from=shown,t0=performance.now();shown=to;(function f(t){const k=Math.min(1,(t-t0)/350),v=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));$("#tt").textContent=to?"ab "+fmt(v)+" €":"";if(k<1)requestAnimationFrame(f)})(t0)}
 
+const INFO={in:"Aufpreis bei starker Verschmutzung +20–50 €, Tierhaaren +20–40 €, Sitz-/Teppich-Extraktion +20–40 €.",pol:"Der Preis hängt vom Zustand des Fahrzeugs ab."};
+const closeTips=x=>$$("#sl .ib").forEach(b=>{if(b!==x){b.setAttribute("aria-expanded","false");b.closest("li").querySelector(".tip").hidden=true}});
+$("#sl").addEventListener("click",e=>{
+  const b=e.target.closest(".ib");closeTips(b);
+  if(!b)return;
+  const t=b.closest("li").querySelector(".tip"),open=t.hidden;
+  t.hidden=!open;b.setAttribute("aria-expanded",open);
+});
+document.addEventListener("pointerdown",e=>{if(!e.target.closest("#sl"))closeTips()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeTips()});
 const lbl=n=>{const i=POL.indexOf(n);return i>-1?"Lackpolitur · Stufe "+(i+1):n};
 const tierPrice=t=>{if(size===null)return"";const v=PR[POL[t]][size];return typeof v==="number"&&v>0?"ab "+fmt(v)+" €":"Anfrage"};
 function upDots(){const d=$$(".dots button");d[1].disabled=size===null;d[2].disabled=size===null||!sel.size;d.forEach((b,i)=>b.classList.toggle("on",i<=step))}
@@ -985,23 +1000,23 @@ function renderPrice(){
   const rows=L.map(n=>{
     const p=PR[n],v=size===null||!p?null:p[size];let pl;
     if(typeof v==="number"&&v>0){tot+=v;pl=pf(n,v)}else{ask=true;pl="auf Anfrage"}
-    return `<li>${lbl(n)}<span>${pl}</span></li>`;
+    const inf=n===SV[0][0]?INFO.in:(POL.includes(n)?INFO.pol:"");
+    return `<li><div class="rl">${lbl(n)}${inf?`<button type="button" class="ib" aria-label="Info zu ${lbl(n)}" aria-expanded="false">i</button>`:""}</div><span>${pl}</span>${inf?`<div class="tip" role="tooltip" hidden>${inf}</div>`:""}</li>`;
   });
   lastTT=tot>0?"ab "+fmt(tot)+" €":"";
   const nx=$("#pnext");nx.disabled=!sel.size;
   nx.textContent=sel.size?`Weiter · ${sel.size} ${sel.size===1?"Leistung":"Leistungen"}`+(tot?` · ab ${fmt(tot)} €`:""):"Leistung wählen";
   upDots();
   if(size===null)return;
-  $("#vh").textContent=SIZES[size][0]+" ("+SIZES[size][1]+")";
+  $("#vh").textContent=SIZES[size][0];
   $("#ctxv").textContent=SIZES[size][0];
   const tt=tot>0?"ab "+fmt(tot)+" €"+(ask?" (+ Leistungen auf Anfrage)":""):"auf Anfrage";
   $("#wa").href=`https://wa.me/${WA}?text=`+encodeURIComponent(L.length?`Anfrage GS CarCare\nKategorie: ${SIZES[size][0]}\nLeistungen: ${L.map(lbl).join(", ")}\nRichtwert: ${tt}`:"Anfrage GS CarCare");
   capSet();
   $("#sl").innerHTML=rows.length?rows.join(""):'<li class="e">Noch keine Leistung gewählt</li>';
   if(tot>0)count(tot);else{shown=0;$("#tt").textContent=L.length?"auf Anfrage":"–"}
-  const nt=[tot>0&&ask?"zzgl. Leistungen auf Anfrage (z. B. Umbauten)":(tot>0?"Richtwert unverbindlich, abhängig vom Fahrzeugzustand":"")];
-  if(sel.has(SV[0][0]))nt.push("Innenaufbereitung: Aufpreis bei starker Verschmutzung +20–50 €, Tierhaaren +20–40 €, Sitz-/Teppich-Extraktion +20–40 €.");
-  if(POL.some(p=>sel.has(p)))nt.push("Lackpolitur: Preis je nach Zustand des Fahrzeugs.");
+  const nt=[tot>0?"Richtwert inkl. USt., unverbindlich – abhängig vom Fahrzeugzustand. Genauer Preis nach Besichtigung.":""];
+  if(tot>0&&ask)nt.unshift("Zzgl. Leistungen auf Anfrage (z. B. Umbauten).");
   $("#tn").innerHTML=nt.filter(Boolean).map(t=>"<span>"+t+"</span>").join("");
 }
 
